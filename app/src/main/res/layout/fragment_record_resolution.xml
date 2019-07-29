@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/add_dev_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:id="@+id/device_setting_return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:background="@color/background_transparent"
+            android:onClick="returnBtnClick"
+            android:padding="4dp"
+            android:drawableStart="@drawable/ic_return_press"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/device_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:text="@string/setting_record_quality"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/front_camera_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="start|center"
+        android:padding="4dp"
+        android:text="@string/front_camera"
+        android:textSize="@dimen/text_normal"/>
+
+    <RadioGroup
+        android:id="@+id/record_quality_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_transparent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/resolution_vga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/bg_white"
+            android:button="@null"
+            android:drawableEnd="@drawable/bg_picture_qulity"
+            android:padding="10dp"
+            android:text="@string/res_vga"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+
+        <RadioButton
+            android:id="@+id/resolution_720p"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/bg_white"
+            android:button="@null"
+            android:drawableEnd="@drawable/bg_picture_qulity"
+            android:padding="10dp"
+            android:text="@string/res_720p"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <RadioButton
+            android:id="@+id/resolution_1080p"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/bg_white"
+            android:button="@null"
+            android:drawableEnd="@drawable/bg_picture_qulity"
+            android:padding="10dp"
+            android:text="@string/res_1080p"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/rear_camera_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/rear_camera"
+        android:gravity="start|center"
+        android:padding="4dp"
+        android:textSize="@dimen/text_normal"/>
+
+    <RadioGroup
+        android:id="@+id/rear_record_res_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_transparent"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rear_resolution_vga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/bg_white"
+            android:button="@null"
+            android:drawableEnd="@drawable/bg_picture_qulity"
+            android:padding="10dp"
+            android:text="@string/res_vga"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <RadioButton
+            android:id="@+id/rear_resolution_720p"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/bg_white"
+            android:button="@null"
+            android:drawableEnd="@drawable/bg_picture_qulity"
+            android:padding="10dp"
+            android:text="@string/res_720p"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+    </RadioGroup>
+</LinearLayout>

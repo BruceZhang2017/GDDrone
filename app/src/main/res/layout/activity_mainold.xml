@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bottombar="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/activity_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        bottombar:bb_activeTabColor="@android:color/holo_orange_dark"
+        bottombar:bb_tabXmlResource="@xml/bottombar_tabs_menu"/>
+
+    <include
+        android:id="@+id/edit_mode_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        layout="@layout/pop_bottom_bar"
+        android:visibility="gone"/>
+</LinearLayout>

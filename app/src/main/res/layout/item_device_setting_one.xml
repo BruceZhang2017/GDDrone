@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_bg_press">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_bg_view"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/item_setting_one_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <ImageView
+            android:id="@+id/item_setting_one_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/company"
+            android:src="@mipmap/ic_right_arrow" />
+
+        <TextView
+            android:id="@+id/item_setting_one_tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/item_setting_one_tv1"
+            android:layout_toLeftOf="@+id/item_setting_one_icon"
+            android:layout_toRightOf="@id/item_setting_one_tv1"
+            android:layout_toStartOf="@+id/item_setting_one_icon"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_smaller_x" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

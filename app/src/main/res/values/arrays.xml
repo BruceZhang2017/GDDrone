@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO: Main Activity -->
+    <array name="main_fragment_tabs">
+        <item>@string/tab_device</item>
+        <item>@string/tab_gallery</item>
+        <item>@string/tab_me</item>
+    </array>
+
+    <!-- TODO: Browse File -->
+    <array name="browse_file_list">
+        <item>@string/tab_image</item>
+        <item>@string/tab_video</item>
+    </array>
+
+    <!-- TODO: Settings -->
+    <array name="setting_list">
+        <!--<item>@string/language</item>-->
+        <item>@string/device_setting</item>
+        <item>@string/app_storage_manager</item>
+        <!--<item>@string/photo_quality</item>-->
+        <!--<item>@string/setting_record_quality</item>-->
+<!--        <item>@string/auto_download_the_photo_files</item>-->
+        <!--<item>@string/save_picture_in_phone</item>-->
+        <item>@string/time_the_watermark</item>
+        <!--<item>@string/app_advanced_settings</item>-->
+        <item>@string/factory_reset</item>
+        <item>@string/help</item>
+        <item>@string/about_app</item>
+    </array>
+
+
+    <!-- TODO:Device Settings -->
+    <array name="device_setting_list">
+        <item>@string/device_name</item>
+        <item>@string/device_password</item>
+        <!--<item>@string/switch_sta_mode</item>-->
+        <!--<item>@string/photo_quality</item>-->
+        <!--<item>@string/setting_record_quality</item>-->
+        <!--<item>@string/advanced_settings</item>-->
+        <!--<item>@string/device_storage_manage</item>-->
+        <!--<item>@string/factory_reset</item>-->
+    </array>
+
+    <array name="device_setting_list_sta">
+        <item>@string/switch_ap_mode</item>
+        <item>@string/photo_quality</item>
+        <item>@string/setting_record_quality</item>
+        <item>@string/advanced_settings</item>
+        <item>@string/device_storage_manage</item>
+        <item>@string/factory_reset</item>
+    </array>
+
+    <!-- TODO:device advanced Settings -->
+    <array name="device_advanced_setting_list">
+        <item>@string/parking_monitoring</item>
+        <item>@string/time_the_watermark</item>
+        <item>@string/boot_prompt</item>
+        <item>@string/sound_recording</item>
+        <item>RTSP</item>
+    </array>
+
+
+    <!-- TODO:app advanced Settings -->
+    <array name="app_advanced_setting_list">
+        <item>@string/using_hard_codec</item>
+        <!--<item>@string/open_debug</item>
+        <item>@string/time_format</item>-->
+    </array>
+
+    <!--TODO: About Fragment-->
+    <array name="about_list">
+        <!--<item>@string/check_app_upgrade</item>-->
+        <item>@string/upload_firmware</item>
+    </array>
+
+    <!--TODO: Upgrade -->
+    <array name="upgrade_sdk_steps">
+        <item>@string/upgrade_step_1</item>
+        <item>@string/upgrade_step_2</item>
+        <item>@string/upgrade_step_3</item>
+        <item>@string/upgrade_step_4</item>
+        <item>@string/upgrade_step_5</item>
+        <item>@string/upgrade_step_6</item>
+    </array>
+
+    <array name="upgrade_apk_steps">
+        <item>@string/upgrade_step_1</item>
+        <item>@string/upgrade_step_2</item>
+        <item>@string/upgrade_step_7</item>
+    </array>
+
+
+    <array name="after_parking_recorder_time">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+    </array>
+
+    <array name="collision_induction_sensitivity_value">
+        <item>@string/shutdown</item>
+        <item>@string/low</item>
+        <item>@string/mid</item>
+        <item>@string/hig</item>
+    </array>
+
+  <array name="language">
+      <item>@string/language_zh_r</item>
+      <item>@string/language_zh_com</item>
+      <item>@string/language_japanese</item>
+      <item>@string/language_korean</item>
+      <item>@string/language_english_us</item>
+      <item>@string/language_french</item>
+  </array>
+
+
+    <array name="photo_qulity">
+        <item>@string/photo_qulity_lo</item>
+        <item>@string/photo_qulity_md</item>
+        <item>@string/photo_qulity_hi</item>
+    </array>
+
+    <!-- app Storage manager-->
+    <array name="storage_operation">
+        <item>@string/storage_size</item>
+        <item>@string/storage_path</item>
+        <item>@string/clean_cache</item>
+    </array>
+
+</resources>

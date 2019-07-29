@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/text_white">
+
+    <RelativeLayout
+        android:id="@+id/top_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:id="@+id/hot_spot_return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@color/background_transparent"
+            android:layout_alignParentStart="true"
+            android:drawableStart="@drawable/ic_return_press"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="@string/switch_sta_mode"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/wifi_msg_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar_layout"
+        android:layout_margin="10dp"
+        android:text="@string/enter_sta_wifi_msg_tip"
+        android:textSize="@dimen/text_small"/>
+
+    <RelativeLayout
+        android:id="@+id/wifi_msg_ssid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wifi_msg_tip"
+        android:padding="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/dbg_edit_shape">
+       <EditText
+           android:id="@+id/edit_hot_spot_wifi"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:inputType="text"
+           android:hint="@string/wifi"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/wifi_pwd_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wifi_msg_ssid_layout"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/dbg_edit_shape">
+
+        <ImageView
+            android:id="@+id/show_or_hide_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@null"
+            android:src="@mipmap/ic_hide_pwd"/>
+
+        <EditText
+            android:id="@+id/edit_hot_spot_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/show_or_hide_pwd"
+            android:maxLines="63"
+            android:hint="@string/password"
+            android:inputType="textPassword"/>
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/save_sta_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wifi_pwd_layout"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/save_station_msg"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_smaller_x"
+        android:checked="true"/>
+
+    <Button
+        android:id="@+id/generate_qr_code_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/save_sta_msg"
+        android:layout_centerHorizontal="true"
+        android:text="@string/generate_qr_code"
+        android:textColor="@color/text_white"
+        android:background="@drawable/drawable_btn_bg"/>
+
+    <TextView
+        android:id="@+id/tips_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/text_black"
+        android:layout_below="@id/generate_qr_code_btn"
+        android:text="@string/device_connected_hot_spot"
+        android:textSize="@dimen/text_smaller_x"/>
+
+    <Button
+        android:id="@+id/back_to_search_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tips_layout"
+        android:layout_centerHorizontal="true"
+        android:text="@string/back_to_search"
+        android:textColor="@color/text_white"
+        android:background="@drawable/drawable_btn_bg"/>
+
+</RelativeLayout>

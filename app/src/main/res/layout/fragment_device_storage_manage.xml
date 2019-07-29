@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/add_dev_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:id="@+id/device_setting_return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/background_transparent"
+            android:onClick="returnBtnClick"
+            android:padding="4dp"
+            android:drawableLeft="@drawable/ic_return_press"
+            />
+
+        <TextView
+            android:id="@+id/device_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:text="@string/device_storage_manage"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/bg_white">
+
+        <TextView
+            android:id="@+id/full_screen_mode_rbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_white"
+            android:padding="10dp"
+            android:text="@string/total_capacity"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/tf_cap_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/bg_white"
+            android:padding="10dp"
+            android:text="45.6GB"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+    </RelativeLayout>
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/setting_marginTop"
+        android:background="@color/bg_white">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/device_storage_format_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@color/bg_white"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/format"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <ImageView
+            android:id="@+id/item_setting_one_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/company"
+            android:src="@mipmap/ic_right_arrow" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_marginTop"
+        android:background="@color/bg_white"
+        android:paddingLeft="10dp"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:id="@+id/photo_del_ibtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/background_transparent"
+            android:padding="10dp"
+            android:src="@mipmap/ic_delete" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/photo_del_ibtn"
+            android:text="@string/rest_photo_accout"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/bg_white"
+        android:paddingLeft="10dp"
+        android:visibility="invisible">
+
+        <ImageButton
+            android:id="@+id/video_del_ibtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/background_transparent"
+            android:padding="10dp"
+            android:src="@mipmap/ic_delete" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/video_del_ibtn"
+            android:background="@color/background_transparent"
+            android:text="@string/rest_video_accout"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+    </RelativeLayout>
+</LinearLayout>

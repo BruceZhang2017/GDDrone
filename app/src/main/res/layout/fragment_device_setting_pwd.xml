@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/add_dev_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:id="@+id/device_setting_return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/background_transparent"
+            android:onClick="returnBtnClick"
+            android:padding="4dp"
+            android:drawableLeft="@drawable/ic_return_press"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/device_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:text="@string/device_password"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+
+        <Button
+            android:id="@+id/pwd_setting_save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@color/background_transparent"
+            android:padding="4dp"
+            android:text="@string/save"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+    </RelativeLayout>
+
+    <!--   <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/bg_white"
+           android:orientation="vertical"
+           android:padding="10dp">
+   -->
+    <EditText
+        android:id="@+id/pwd_setting_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_marginTop"
+        android:background="@color/bg_white"
+        android:hint="@string/please_input_password"
+        android:inputType="textPassword"
+        android:maxLength="27"
+        android:padding="10dp"
+        android:textColor="@color/text_black"
+        android:textColorHint="@color/text_press_gray"
+        android:textSize="@dimen/text_small" />
+
+    <EditText
+        android:id="@+id/pwd_setting_comfir_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/bg_white"
+        android:hint="@string/please_input_password_again"
+        android:inputType="textPassword"
+        android:maxLength="27"
+        android:padding="10dp"
+        android:textColor="@color/text_black"
+        android:textColorHint="@color/text_press_gray"
+        android:textSize="@dimen/text_small" />
+
+</LinearLayout>

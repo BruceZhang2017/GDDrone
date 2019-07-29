@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jieli.stream.dv.gdxxx.ui.fragment.browse.PhotoViewFragment">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/photo_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/video_bg"/>
+
+    <TextView
+        android:id="@+id/photo_view_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/photo_view_pager"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_small"
+        tools:ignore="RelativeOverlap" />
+
+    <TextView
+        android:id="@+id/photo_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_alignTop="@+id/photo_view_pager"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_small"/>
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/background_transparent"
+        android:drawableLeft="@drawable/ic_return_press"
+        android:padding="4dp"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_small" />
+
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="dialog_bg_white">#f8f8f8</color>
+    <color name="dialog_bg_white_start">#f0f0f0</color>
+    <color name="divider_bg">#d7d7db</color>
+    <color name="button_bg_press">#eaeaea</color>
+    <color name="bar_blue">#2d96e9</color>
+    <color name="text_white">#ffffff</color>
+    <color name="bg_white">#ffffff</color>
+    <color name="text_black">#000000</color>
+    <color name="text_blue">#2f8df1</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_press_gray">#a9a9a9</color>
+    <color name="background_green">#45c98d</color>
+    <color name="text_orange">#ff7f27</color>
+    <color name="text_green">#45c98d</color>
+    <color name="text_transparent">#00000000</color>
+    <color name="text_purple">#be729f</color>
+    <color name="text_red">#C4161C</color>
+    <color name="bg_red">#C4161C</color>
+    <color name="bg_thumbnail_default">#ff646464</color>
+
+    <color name="view_gray">#ebebeb</color>
+    <color name="bg_gray">#efeff3</color>
+    <color name="bg_gray2">#efeff3</color>
+    <color name="video_bg">#252525</color>
+    <color name="bg_seekbar">#999999</color>
+    <color name="black_transparent_30">#b3575958</color>
+    <color name="black_transparent_60">#dc575958</color>
+    <color name="translucent_white_24p">#3DFFFFFF</color>
+    <color name="translucent_white_60">#faFFFFFF</color>
+    <color name="setting_panel_bar">#FF323232</color>
+    <color name="setting_panel_title">#FF555555</color>
+    <color name="background_color">#FF323232</color>
+    <color name="setting_panel_backgroud">#FFaaaaaa</color>
+    <color name="playview_backgroud">#FF323232</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="bg_video_state">#96000000</color>
+
+    <color name="half_transparent">#80000000</color>
+    <color name="background_transparent">#00000000</color>
+
+    <color name="bg_pie_chart_used">#999999</color>
+    <color name="bg_pie_chart_rest">#ff7f27</color>
+
+    <color name="bg_playback_seek_bar">#2fff9933</color>
+    <color name="bg_playback_seek_bar_sos">#0fCC3300</color>
+    <color name="bg_playback_seek_thumb">#ff7f27</color>
+    <color name="bg_playback_tip">#ff2727</color>
+    <color name="app_color_style">#d04741</color>
+
+    <color name="transparent_dark">#77000000</color>
+    <color name="transparent_text_white">#77ffffff</color>
+    
+    <color name="gray_percent_50">#80808080</color>
+</resources>

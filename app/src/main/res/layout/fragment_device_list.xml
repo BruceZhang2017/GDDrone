@@ -1,0 +1,78 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_bg_press">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/device_list_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@color/bg_video_state">
+            <TextView
+                android:id="@+id/device_list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="@string/tab_device"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_normal_inc"/>
+            <ImageView
+                android:id="@+id/device_list_switch_search_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/drawable_ap_search_mode"
+                android:contentDescription="@string/company"
+                android:visibility="visible"/>
+        </RelativeLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/device_list_top_bar"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:background="@android:color/transparent"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+<!--        <com.jieli.stream.dv.running2.ui.widget.pullrefreshview.layout.PullRefreshLayout
+            android:id="@+id/pull_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/device_list_top_bar"
+            android:layout_marginTop="5dp"
+            android:background="@color/dialog_bg_white">
+
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/device_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"/>
+
+            <com.jieli.stream.dv.running2.ui.widget.pullrefreshview.view.ExpandHeaderView
+                android:id="@+id/device_list_header_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.jieli.stream.dv.running2.ui.widget.pullrefreshview.layout.PullRefreshLayout>-->
+
+    </RelativeLayout>
+</FrameLayout>

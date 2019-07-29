@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/add_dev_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:id="@+id/device_setting_return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/background_transparent"
+            android:onClick="returnBtnClick"
+            android:padding="4dp"
+            android:drawableLeft="@drawable/ic_return_press"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/device_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:text="@string/advanced_settings"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/device_advanced_setting_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/text_transparent"
+        android:scrollbars="none" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:background="@color/bg_white"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/collision_induction_sensitivity"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/senor_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/ic_down"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/open"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/senor_tv"
+            android:layout_alignTop="@id/senor_tv"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/senor_tv"
+            android:layout_toStartOf="@id/senor_tv"
+            android:background="@color/bg_gray" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_marginTop"
+        android:background="@color/bg_white"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/after_parking_video_length"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/hour_tv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/ic_down"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/hour"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/hour_tv"
+            android:layout_alignTop="@id/hour_tv"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/hour_tv"
+            android:layout_toStartOf="@id/hour_tv"
+            android:background="@color/bg_gray" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/time_chose_tip"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_small"
+        android:visibility="gone"/>
+</LinearLayout>

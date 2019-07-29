@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jieli.stream.dv.gdxxx.ui.fragment.AboutFragment">
+
+    <RelativeLayout
+        android:id="@+id/dev_photo_normal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <ImageView
+            android:id="@+id/about_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_return_press"
+            android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/dev_photo_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/about_return"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/about_app"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+        <ImageView
+            android:id="@+id/about_app_logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/icon1024"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/about_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/about_app_logo"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/text_black"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/about_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"/>
+
+    </LinearLayout>
+
+</LinearLayout>

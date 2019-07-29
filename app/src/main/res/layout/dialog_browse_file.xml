@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/dialog_file_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <ImageView
+            android:id="@+id/dialog_return_path"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_return_press" />
+
+        <TextView
+            android:id="@+id/dialog_choose_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="@string/select_dir_tip"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal" />
+
+        <ImageView
+            android:id="@+id/create_dir_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_create_dir_press" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/dialog_file_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_file_top_layout"
+        android:background="#DDDDDD"
+        android:padding="10dp"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_normal"
+        android:text="/sdcard0/GD240 HD" />
+
+    <View
+        android:id="@+id/dialog_file_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/dialog_file_path"
+        android:background="@color/text_gray" />
+
+    <ListView
+        android:id="@+id/dialog_file_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_above="@+id/dialog_btn_layout"
+        android:layout_below="@+id/dialog_file_line" />
+
+
+    <LinearLayout
+        android:id="@+id/dialog_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_file_cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_bt_bg"
+            android:text="@string/dialog_cancel"
+            android:textColor="@color/text_black" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/dialog_file_confirm_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_bt_bg"
+            android:text="@string/dialog_confirm"
+            android:textColor="@color/text_black" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dialog_file_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/dialog_btn_layout"
+        android:background="@color/text_gray" />
+
+</RelativeLayout>

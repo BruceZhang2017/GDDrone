@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_calendar"
+            android:padding="5dp"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/item_time_line_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019年1月1日"
+            android:padding="3dp"
+            android:textSize="@dimen/text_small"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+<!--设置列数-->
+    <com.jieli.stream.dv.gdxxx.ui.widget.NoScrollGridView
+        android:id="@+id/item_time_line_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:numColumns="5"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="3dp"
+        android:verticalSpacing="5dp"/>
+
+</LinearLayout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:id="@+id/work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/track_query_mapView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:visibility="gone"
+            android:focusable="true"
+            android:clickable="true"/>
+
+        <com.jieli.stream.dv.gdxxx.ui.widget.media.IjkVideoView
+            android:id="@+id/video_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@android:color/black"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_centerInParent="true"/>
+    <ImageView
+        android:id="@+id/shrink_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignEnd="@id/view_line"
+        android:src="@mipmap/ic_left_arrow_in"
+        android:contentDescription="@null"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/expand_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:contentDescription="@null"
+        android:src="@mipmap/ic_right_arrow_out"/>
+    <ImageView
+        android:id="@+id/cancel_playback"
+        android:src="@mipmap/ic_cancel_x"
+        android:contentDescription="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        android:padding="10dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/playback_widget_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/play_pause"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/ic_playback_pause"
+            android:visibility="visible" />
+
+
+        <ImageButton
+            android:id="@+id/stop_fast_forward_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/background_transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:src="@drawable/ic_stop_forward_press"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/fast_forward"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/background_transparent"
+            android:gravity="center"
+            android:src="@mipmap/ic_fast_forward_1"
+            android:textColor="@color/text_white"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/mov_record_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/background_transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:src="@mipmap/ic_cut_mov"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/play_back_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/text_white"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/rts_buffering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+    <ProgressBar
+        android:id="@+id/playback_progress"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:progressDrawable="@drawable/white_horizon_progress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

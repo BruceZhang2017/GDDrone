@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <RelativeLayout
+        android:id="@+id/file_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+
+        <RelativeLayout
+            android:id="@+id/top_edit_mode_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/edit_all_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginLeft="3dp"
+                android:text="@string/all_select"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small"/>
+
+            <TextView
+                android:id="@+id/edit_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:padding="5dp"
+                android:layout_marginRight="3dp"
+                android:text="@string/dialog_exit"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small"/>
+
+            <TextView
+                android:id="@+id/edit_center_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/edit_exit"
+                android:layout_toRightOf="@+id/edit_all_select"
+                android:padding="5dp"
+                android:gravity="center"
+                android:text="@string/selected_num"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/top_normal_mode_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/ic_return_press"
+                android:contentDescription="@null"
+                android:padding="5dp"
+                android:paddingLeft="10dp" />
+            <ImageView
+                android:id="@+id/operation_edit_btn"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:src="@mipmap/ic_edit_white"
+                android:contentDescription="@string/company"/>
+
+            <com.shizhefei.view.indicator.FixedIndicatorView
+                android:id="@+id/file_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/btnBack"
+                android:layout_toLeftOf="@+id/operation_edit_btn"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/file_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/file_top_layout" />
+    
+</RelativeLayout>

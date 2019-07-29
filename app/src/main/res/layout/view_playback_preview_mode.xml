@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/preview_mode_status_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+        <ImageView
+            android:id="@+id/status_bar_record_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_red_dot"
+            android:layout_margin="10dp"
+            android:contentDescription="@null"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnWifi"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/main_wifi" />
+
+        <ImageView
+            android:id="@+id/imgBattery"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@mipmap/main_battery" />
+
+        <TextView
+            android:id="@+id/txtHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text=""
+            android:textColor="@color/text_white" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text=""
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="220dp"
+        android:layout_height="250dp"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:id="@+id/imgOilPanel"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/main_oilpanel" />
+
+        <ImageButton
+            android:id="@+id/btnOilPoint"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginTop="114dp"
+            android:background="@mipmap/main_point" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="220dp"
+        android:layout_height="250dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:id="@+id/imgGSensorPanel"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/main_gsensorpanel" />
+        <ImageButton
+            android:id="@+id/btnGSensorPoint"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="99dp"
+            android:layout_marginTop="114dp"
+            android:background="@mipmap/main_point" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/preview_mode_left_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:padding="5dp"
+        tools:ignore="DisableBaselineAlignment">
+
+        <ImageView
+            android:id="@+id/center_bar_video_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/drawable_record_control"/>
+        <ImageView
+            android:id="@+id/center_bar_photo_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/drawable_take_photo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/preview_mode_center_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/left_bar_adjust_resolution_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/drawable_resolution_hd"/>
+
+        <ImageView
+            android:id="@+id/left_bar_browse_photo_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/drawable_gallery"/>
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/btnPhotos"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/main_photos"/>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+            <ImageButton
+                android:id="@+id/btnLandingOrTakeoff"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="0dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/main_onefly"/>
+            <ImageButton
+                android:id="@+id/btnNotHead"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="43dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/main_nothead"/>
+            <ImageButton
+                android:id="@+id/btnFlyBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="43dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/main_flyback"/>
+            <ImageButton
+                android:id="@+id/btnSpeed"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="126dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/main_speed"/>
+        </RelativeLayout>
+
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/main_settings" />
+    </RelativeLayout>
+</RelativeLayout>

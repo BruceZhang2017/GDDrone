@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Global Value -->
+    <string name="app_name">GD240 HD</string>
+    <string name="company">ZH-JL</string>
+
+
+    <string name="finish_app">再按一次退出程序</string>
+    <string name="main_low_power">电池电量低已停止录像!</string>
+    <string name="main_whitebalance_auto">自动</string>
+    <string name="main_whitebalance_sunlight">日光</string>
+    <string name="main_whitebalance_cloundy">阴天</string>
+    <string name="main_whitebalance_incandescent">钨丝灯</string>
+    <string name="main_whitebalance_fluorescent">荧光灯</string>
+
+    <!-- TODO: Activity -->
+    <!-- Main Activity -->
+    <string name="main_height_0">Height:0m</string>
+    <string name="main_height">Height:</string>
+    <string name="main_status_online">状态:在线</string>
+    <string name="main_status_offline">状态:离线</string>
+    <string name="sensor_panel_settting">== 摄像头参数 ==</string>
+    <string name="sensor_panel_brightness">亮度</string>
+    <string name="sensor_panel_contrast">对比度</string>
+    <string name="sensor_panel_exposure">曝光</string>
+    <string name="sensor_panel_white_balance">白平衡</string>
+
+    <string name="tab_device">设备</string>
+    <string name="tab_share">分享</string>
+    <string name="tab_gallery">相册</string>
+    <string name="tab_me">设置</string>
+    <string name="double_tap_to_exit">再按一次返回键退出</string>
+    <string name="live_preview">实时预览</string>
+    <string name="dialog_return">返回</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="dialog_tips">提示</string>
+    <string name="fail_to_play">播放失败</string>
+    <string name="loading">正在加载</string>
+    <string name="connecting">正在连接</string>
+    <string name="upgrade_desc">更新描述</string>
+    <string name="device_diaconnected">设备连接已断开</string>
+    <string name="dialog_reconnection_chose">是否重新连接设备</string>
+    <string name="input_old_pwd">请输入旧密码</string>
+    <string name="dev_refused_access">设备拒绝连接</string>
+    <string name="projection_not_support">抱歉，投屏功能只能在5.0以上的手机使用</string>
+
+    <!-- Flash Activity-->
+    <string name="open_wifi">是否开启wifi?</string>
+    <string name="open_gpg_tip">应用需要GPS功能，请打开定位服务才可继续。</string>
+    <string name="request_location_permission">应用需要获取位置信息才能正常工作，请授予！</string>
+    <string name="request_sdcard_permission">应用需要获取读写内存功能才能正常工作，请授予！</string>
+    <string name="request_contacts_permission">应用需要获取通讯录权限才能正常工作，请授予！</string>
+    <string name="request_microphone_permission">应用需要获取麦克风权限才能正常工作，请授予！</string>
+    <string name="request_write_setting_permission">应用需要获取修改系统配置权限才能正常工作，请授予！</string>
+    <string name="grant">授予</string>
+
+    <!-- playback Activity-->
+    <string name="auto_play">无操作10秒后自动播放选中视频</string>
+    <string name="playback">回放</string>
+    <string name="playback_seekbar_tip_left">左滑返回回放模式</string>
+    <string name="playback_seekbar_tip_right">拖入右侧进入预览</string>
+    <string name="null_data">无数据</string>
+    <string name="thumbnail_load_fail">图片加载错误</string>
+    <string name="lock_file_tip">是否加锁此文件？</string>
+    <string name="unlock_file_tip">是否解锁此文件？</string>
+
+    <!--Language Activity-->
+    <string name="comfirm">确定</string>
+    <string name="language_zh_r">中文(简体)</string>
+    <string name="language_zh_com">中文(繁体)</string>
+    <string name="language_japanese">Japanese</string>
+    <string name="language_english_us">English(United States)</string>
+    <string name="language_korean">Korean</string>
+    <string name="language_french">French</string>
+
+    <!-- AppAdvancedSetting Activity -->
+    <string name="allow_to_save_traffic_data">允许保存行车数据</string>
+    <string name="open_debug">打开调试模式</string>
+    <string name="time_format">时间格式</string>
+    <string name="format_follow_language">自动跟随语言</string>
+
+    <!-- App Storage Manager Activity-->
+    <string name="remaining_storage">剩余</string>
+    <string name="used_storage">已使用</string>
+
+    <!-- TODO: Fragment -->
+    <!-- Device List fragment -->
+    <string name="unknown_device_name">未知设备</string>
+
+    <!--Video Fragment-->
+    <string name="device_media">设备文件</string>
+    <string name="open_video_tip">打开录像中，请等待</string>
+    <string name="front_view">前视</string>
+    <string name="rear_view">后视</string>
+    <string name="no_video_tip">请先打开录像</string>
+    <string name="cyc_save_video_failed">循环保存失败</string>
+    <string name="no_card_take_photo_failed">拍照失败, 原因: %1$s</string>
+    <string name="no_card_take_photo_success">拍照成功, 路径 : %1$s</string>
+    <string name="no_card_video_success">录像成功, 文件名: %1$s</string>
+    <string name="no_card_video_failed">录像失败, 原因: %1$s</string>
+    <string name="create_file_failed">创建输出文件失败</string>
+    <string name="open_rts_tip">请打开实时流</string>
+    <string name="save_file_failed">保存文件失败</string>
+    <string name="storage_error">存储空间不足</string>
+    <string name="init_mov_error">启动MOV封装器失败</string>
+    <string name="take_photo_timeout">拍照超时</string>
+    <string name="no_card_record_tip">TF卡不在线，录制到本地吗？</string>
+
+    <!-- Browse File fragment -->
+    <string name="tab_image">图片</string>
+    <string name="tab_video">视频</string>
+    <string name="tab_protected">紧急</string>
+
+    <string name="all_select">全选</string>
+    <string name="cancel_all_select">取消全选</string>
+    <string name="selected_num">已选择 : %1$d</string>
+    <string name="selected_file_empty_tip">请选择文件</string>
+
+    <!-- Setting fragment -->
+    <string name="device_setting">WiFi设置</string>
+    <string name="app_storage_manager">存储管理</string>
+    <string name="language">语言</string>
+    <string name="save_picture_in_phone">保存图片到手机</string>
+    <string name="auto_download_the_photo_files">自动下载拍照文件</string>
+    <string name="app_advanced_settings">APP高级设置</string>
+    <string name="help">帮助</string>
+    <string name="about_app">关于</string>
+    <string name="share">分享</string>
+
+    <!-- device Setting fragment -->
+    <string name="setting">设置</string>
+    <string name="device_name">WiFi名称</string>
+    <string name="device_password">WiFi密码</string>
+    <string name="volume_adjustment">音量调节</string>
+    <string name="sound_recording">录像录音</string>
+    <string name="photo_associated_video">拍照关联视频</string>
+    <string name="photo_quality">拍照像素</string>
+    <string name="camera_model">摄像模式</string>
+    <string name="advanced_settings">高级设置</string>
+    <string name="device_storage_manage">无人机储存管理</string>
+    <string name="save">保存</string>
+    <string name="switch_sta_mode">切换到STA模式</string>
+    <string name="switch_ap_mode">切换到AP模式</string>
+    <string name="waring_operation_tip">该操作将会导致设备重启，是否继续？</string>
+
+    <!-- device name fragment-->
+    <string name="device_name_input_limit">名字必须为1-%1$d个字符,中文占2-3个字符,当前字符数：%2$d</string>
+    <string name="device_name_length_error">wifi名字过长</string>
+
+    <!-- device password fragment-->
+    <string name="please_input_password">请输入新密码</string>
+    <string name="please_input_password_again">请再次输入新密码</string>
+
+    <!-- device volume fragment-->
+    <string name="device_volume_value">无人机音量(%1$d)</string>
+
+    <!-- picture qulity fragment-->
+    <string name="photo_qulity_value">图象质量:%1$s</string>
+    <string name="recorded_time">大约可录制:(%1$s)</string>
+    <string name="photo_qulity_hi">200W</string>
+    <string name="photo_qulity_md">100W</string>
+    <string name="photo_qulity_lo">30W</string>
+
+    <!-- camera mode fragment-->
+    <string name="full_screeen_mode">全屏模式(16:9)</string>
+    <string name="width_screen_mode">影院宽屏模式(2.4:1)</string>
+
+    <!-- storage fragment-->
+    <string name="total_capacity">总容量</string>
+    <string name="rest_capacity">剩余</string>
+    <string name="rest_photo_accout">当前照片%1$d张，最多还能储存%2$d张</string>
+    <string name="rest_video_accout">当前视频%1$d个，最多还能储存%2$d个</string>
+    <string name="storage_path">存储路径:</string>
+    <string name="storage_size">存储空间大小</string>
+    <string name="clean_cache">清理缓存</string>
+    <string name="clean_cache_content">您确定要清除缓存?</string>
+
+    <!-- advanced settings fragment-->
+    <string name="parking_monitoring">停车监控</string>
+    <string name="time_the_watermark">时间水印</string>
+    <string name="boot_prompt">开机音效</string>
+    <string name="picture_flip">图像左右反转</string>
+    <string name="collision_induction_sensitivity">碰撞感应灵敏度</string>
+    <string name="after_parking_video_length">停车后录像时长</string>
+    <string name="open">打开</string>
+    <string name="shutdown">关闭</string>
+    <string name="hour">%1$s小时</string>
+    <string name="time_chose_tip">选择时长，当停车达到该时长后自动关机，从而保护车辆电池</string>
+
+    <!-- About Fragment -->
+    <string name="check_app_upgrade">检查升级</string>
+    <string name="upload_firmware">上传固件</string>
+    <string name="uploading">正在上传</string>
+    <string name="upload_failed">上传失败</string>
+
+    <!-- Add Device fragment -->
+    <string name="nearby_device">附近无人机</string>
+    <string name="device_wifi_ssid">设备Wifi名</string>
+    <string name="device_wifi_pwd">Wifi密码</string>
+    <string name="add">添加</string>
+    <string name="connected_wifi_tip">连接Wifi[%1$s]成功</string>
+    <string name="saved">已保存</string>
+    <string name="wifi_pwd_length_not_allow">密码最少8位</string>
+    <string name="wifi_pwd_not_empty">密码不能为空</string>
+
+    <!--Upgrade fragment-->
+    <string name="upgrade">升级</string>
+    <string name="upgrade_step_1">连接到互联网</string>
+    <string name="upgrade_step_2">下载升级包到手机</string>
+    <string name="upgrade_step_3">连接设备</string>
+    <string name="upgrade_step_4">上传升级包到设备</string>
+    <string name="upgrade_step_5">设备正在升级，请勿断电</string>
+    <string name="upgrade_step_6">升级完成</string>
+    <string name="upgrade_step_7">升级APK</string>
+    <string name="executing_step">正在执行：%1$s</string>
+    <string name="latest_version">版本已是最新版本</string>
+    <string name="firmware_upgrade_tip">固件版本有更新</string>
+    <string name="current_version">当前版本：%1$s</string>
+    <string name="upgrade_version">更新版本：%1$s</string>
+    <string name="upgrade_failed_tip">升级失败，请检查网络</string>
+
+    <!--Device photo fragment-->
+    <string name="dev_gallery">设备图库</string>
+    <string name="no_data_tip">当前没有数据</string>
+    <string name="no_more_data">没有更多数据</string>
+
+    <string name="downloading_tip">下载文件中，请等待</string>
+    <string name="deleting_tip">删除文件中，请等待</string>
+
+    <!--Photo View Fragment-->
+    <string name="counter_format">%1$d / %2$d</string>
+
+    <!--Video Player Fragment-->
+    <string name="default_time_format">00:00</string>
+    <string name="fast_forward">快进</string>
+    <string name="fast_backward">快退</string>
+    <string name="player_not_support_dev">播放器不支持此设备</string>
+    <string name="player_not_support_media">播放器不支持此媒体</string>
+
+    <!-- Emergency Video Fragment -->
+    <string name="delete_emergency_video_tip">是否删除紧急视频？</string>
+
+    <!-- Modify storage url -->
+    <string name="moving_dir_tip">正在修改存储位置，请稍等</string>
+    <string name="delete_dir_tip">确定删除文件夹[%1$s]？</string>
+    <string name="current_path_is_root">当前是根目录</string>
+    <string name="select_dir_error">根目录不可以作为存储位置，请选择空文件夹</string>
+    <string name="select_dir_tip">请选择空文件夹</string>
+    <string name="modify_storage_url_failed">修改存储位置失败，请选择其他文件夹</string>
+    <string name="modify_storage_url_success">修改存储位置成功</string>
+    <string name="select_dir_path">选择文件夹</string>
+    <string name="create_dir_success">创建文件夹成功</string>
+    <string name="delete_dir_success">删除文件夹成功</string>
+    <string name="delete_dir_failed">删除文件夹失败</string>
+    <string name="input_content_empty">输入内容不能为空</string>
+    <string name="input_content_tip">请输入内容</string>
+    <string name="input_new_dir_name">请输入文件夹名称</string>
+
+    <!--Crash Video-->
+    <string name="start_crash_video_task">正在保存碰撞检测视频，请不要退出</string>
+    <string name="end_crash_video_task">碰撞检测视频保存成功，路径：%1$s</string>
+    <string name="error_crash_video_task">碰撞检测视频保存失败，原因: %1$s</string>
+
+
+    <!-- TODO: Dialog-->
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_no">否</string>
+    <string name="dialog_yes">是</string>
+    <string name="dialog_exit">退出</string>
+    <string name="dialog_warning">警告</string>
+
+    <string name="download_file">下载文件</string>
+
+    <string name="connection_timeout">连接超时，请确认网络环境并重新连接</string>
+    <string name="sdcard_online">TF Card 在线</string>
+    <string name="sdcard_offline">TF Card 不在线</string>
+
+    <string name="title_activity_playback">PlaybackActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="device_no_videos">设备没有视频文件</string>
+    <string name="device_no_media_files">设备没有媒体文件</string>
+
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="immediate_effect">是否立即生效，是则会重启设备，否则重启设备后生效</string>
+    <string name="dialod_wait">请稍后</string>
+
+    <string name="select_wifi">选择WiFi</string>
+
+    <!--  TODO Toast -->
+    <string name="save_fail">保存失败</string>
+    <string name="save_success">保存成功</string>
+    <string name="pwd_not_be_null">密码不能为空</string>
+    <string name="please_input_comfirm_pwd">请输入确认密码</string>
+    <string name="pwd_lenth_limits">密码长度至少为8或者为空</string>
+    <string name="pwd_check_fail">两次输入的密码不一致</string>
+    <string name="name_format_error">wifi名输入格式不符合要求</string>
+    <string name="name_empty_error">用户名错误</string>
+    <string name="input_pwd_error">密码格式错误</string>
+    <string name="pwd_not_match_error">密码错误</string>
+    <string name="input_pld_pws_error">旧密码不正确,设置失败</string>
+    <string name="please_connect_device_to_use">请连接设备后使用!</string>
+    <string name="setting_failed">设置失败</string>
+    <string name="setting_successed">设置成功</string>
+    <string name="failed">失败</string>
+    <string name="successed">成功</string>
+    <string name="setting_open">打开</string>
+    <string name="setting_close">关闭</string>
+    <string name="hig">高</string>
+    <string name="low">低</string>
+    <string name="mid">中</string>
+    <string name="format">格式化</string>
+    <string name="format_failed">格式化失败</string>
+    <string name="format_successed">格式化成功</string>
+    <string name="play_over">视频已经播放完毕</string>
+    <string name="pwd_is_empty_now">该设备的密码已为空</string>
+    <string name="record_success">录制成功</string>
+    <string name="record_fail">录制失败</string>
+    <string name="wait_a_moment">录制处理中，请稍等 2 秒</string>
+    <string name="tip_open_wifi">请打开Wifi</string>
+    <string name="rear_camera_offline">当前后置摄像机离线</string>
+    <string name="rear_camera_not_supported">设备不支持后置摄像头</string>
+    <string name="using_hard_codec">使用硬编解码器</string>
+    <string name="wifi_ssid_empty_tip">SSID不能为空</string>
+    <string name="enter_sta_wifi_msg_tip">请输入需要连接的网络信息</string>
+    <string name="save_station_msg">保存以上信息到设备端</string>
+    <string name="submit">提交</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="password">密码</string>
+    <string name="generate_qr_code">生成二维码</string>
+    <string name="start_search_device">扫描完毕！去搜索</string>
+    <string name="scan_qr_code_tips">使用设备扫描二维码</string>
+    <string name="device_connected_hot_spot">设备已经连接网络</string>
+    <string name="back_to_search">返回去搜索</string>
+
+    <string name="please_connect_uav">请先连接无人机Wifi</string>
+    <string name="please_connect_uav_error">连接稍候再试或尝试重启无人机</string>
+    <string name="res_vga">VGA</string>
+    <string name="res_720p">720P</string>
+    <string name="res_1080p">1080P</string>
+    <string name="setting_record_quality">录像分辨率</string>
+    <string name="front_camera">前摄像头</string>
+    <string name="rear_camera">后摄像头</string>
+    <string name="stop_recording_first">请先停止录像</string>
+    <string name="stop_recording_tips">需要停止录像</string>
+    <string name="start_recording">开始录像</string>
+    <string name="stop_recording">停止录像</string>
+    <string name="failure_photo">拍照失败</string>
+    <string name="success_photo">拍照成功</string>
+    <string name="one_key_fly">一键起飞或降落</string>
+    <string name="one_key_headless">无头飞行</string>
+    <string name="one_key_return">一键返航</string>
+    <string name="one_key_normal_speed">普通飞速</string>
+    <string name="one_key_middle_speed">中级飞速</string>
+    <string name="one_key_high_speed">高级飞速</string>
+    <string name="operation_failed_and_try_again">操作失败，请重试</string>
+    <string name="factory_reset">恢复出厂设置</string>
+    <string name="factory_reset_tips">确定恢复出厂设置？</string>
+    <string name="delete_all_files">删除全部</string>
+    <string name="sure_to_delete">确定删除吗？</string>
+    <string name="sharing_needs_disconnect">分享前请先断开与设备WiFi连接!</string>
+    <string name="start_using">开始使用</string>
+    <string name="agree_with">我同意</string>
+    <string name="user_agreement">用户使用协议</string>
+    <string name="only_support_one_sharing">仅支持分享一张图片</string>
+    <string name="stop_trajectory_tracking">请先停止行车轨迹追踪</string>
+    <string name="resume_normal_playback_speed">请先恢复正常播放速度</string>
+    <string name="not_supported_in_rtsp">处于RTSP模式时不支持切换</string>
+
+    <!--debug info-->
+    <string name="drop_packet_count">drop_count</string>
+    <string name="drop_packet_sum">drop_sum</string>
+    <string name="video_rate">v_rate</string>
+    <string name="audio_decoder">a_dec</string>
+    <string name="audio_sample_rate">a_rate</string>
+    <string name="v_codec">v-codec</string>
+    <string name="a_codec">a-codec</string>
+    <string name="vdec">vdec</string>
+    <string name="fps">fps</string>
+    <string name="v_cache">v-cache</string>
+    <string name="a_cache">a-cache</string>
+    <string name="load_cost">load-cost</string>
+    <string name="seek_cost">seek_cost</string>
+    <string name="seek_load_cost">seek_load_cost</string>
+    <string name="tcp_speed">tcp_speed</string>
+    <string name="bit_rate">bit_rate</string>
+    <string name="open_debug_tip">设置调试，还需要%1$d次点击</string>
+    <string name="open_debug_ok">设置调试成功</string>
+</resources>

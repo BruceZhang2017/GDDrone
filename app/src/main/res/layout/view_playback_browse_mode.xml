@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/position_of_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="3dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_normal"
+        tools:text="2017-07-01 10:24:00" />
+
+    <TextView
+        android:id="@+id/auto_play_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/position_of_time"
+        android:layout_centerInParent="true"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_small"
+        android:text="@string/auto_play"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/auto_play_tip"
+        android:gravity="center"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_small"
+        android:text="@string/null_data"
+        />
+    <com.jieli.stream.dv.gdxxx.ui.widget.coverflow.RecyclerCoverFlow
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/auto_play_tip"/>
+
+
+</RelativeLayout>

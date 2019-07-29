@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/add_dev_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/background_transparent"
+            android:drawableLeft="@drawable/ic_return_press"
+            android:onClick="returnBtnClick"
+            android:padding="4dp"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/device_setting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:text="@string/app_storage_manager"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal_inc"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical"
+        android:fadingEdge="vertical">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:scrollbarStyle="outsideInset"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollbars="vertical">
+            <RelativeLayout
+                android:id="@+id/radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/bg_white">
+
+                <TextView
+                    android:id="@+id/full_screen_mode_rbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_white"
+                    android:padding="10dp"
+                    android:text="@string/total_capacity"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/app_storage_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/bg_white"
+                    android:padding="10dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_small" />
+            </RelativeLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/app_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/setting_marginTop"
+                android:background="@color/bg_white">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+            <ListView
+                android:id="@+id/app_storage_view"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:divider="@color/text_transparent"
+                android:scrollbars="none"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

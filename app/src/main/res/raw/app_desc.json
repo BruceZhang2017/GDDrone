@@ -1,0 +1,6 @@
+{
+  "dev_type": ["AC54xx_wifi_car_camera"],
+  "dev_list": {
+    "AC54xx_wifi_car_camera": ["1.0.0", "1.0.0"]
+  }
+}

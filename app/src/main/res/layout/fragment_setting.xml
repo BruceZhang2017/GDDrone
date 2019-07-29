@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/setting_top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@color/bg_video_state">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="0dp"
+                android:background="@drawable/ic_return_press"
+                android:contentDescription="@null"
+                android:padding="5dp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:id="@+id/setting_top_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:text="@string/tab_me"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_normal_inc"/>
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/setting_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/setting_top_layout"
+            android:divider="@color/text_transparent"
+            android:scrollbars="none"/>
+    </RelativeLayout>
+</FrameLayout>

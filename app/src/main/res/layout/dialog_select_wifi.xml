@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_top_height"
+        android:layout_gravity="center"
+        android:background="@color/bg_video_state"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/select_wifi"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:padding="3dp"
+            android:background="@drawable/dbg_edit_shape">
+            <TextView
+                android:id="@+id/dialog_wifi_ssid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="WiFi"
+                android:textSize="@dimen/text_smaller"
+                android:textColor="@color/text_black"/>
+            <Spinner
+                android:id="@+id/dialog_wifi_ssid_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="3dp"
+            android:background="@drawable/dbg_edit_shape">
+            <ImageView
+                android:id="@+id/dialog_show_or_hide_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_hide_pwd"/>
+
+            <EditText
+                android:id="@+id/dialog_edit_wifi_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/dialog_show_or_hide_pwd"
+                android:hint="enter wifi password"
+                android:textSize="@dimen/text_small"
+                android:padding="6dp"
+                android:inputType="textPassword"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/dbg_gray_shape">
+
+        <TextView
+            android:id="@+id/dialog_left"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_cancel"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small"
+            android:background="@drawable/bg_dialog_cancel_selector"
+            android:visibility="visible"/>
+
+        <View
+            android:id="@+id/divider_id"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/text_gray" />
+
+        <TextView
+            android:id="@+id/dialog_right"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/dialog_confirm"
+            android:textColor="@color/text_black"
+            android:background="@drawable/bg_dialog_confirm_selector"
+            android:textSize="@dimen/text_small"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_device"
+        icon="@mipmap/ic_device_unselected"
+        title="@string/tab_device" />
+    <tab
+        id="@+id/tab_gallery"
+        icon="@mipmap/ic_gallery_unselected"
+        title="@string/tab_gallery" />
+    <tab
+        id="@+id/tab_me"
+        icon="@mipmap/ic_me_unselected"
+        title="@string/tab_me" />
+</tabs>

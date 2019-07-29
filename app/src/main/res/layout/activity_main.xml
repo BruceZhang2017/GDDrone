@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_video_state"
+    tools:context="com.jieli.stream.dv.gdxxx.ui.activity.MainActivity">
+
+    <com.jieli.stream.dv.gdxxx.ui.widget.media.IjkVideoView
+        android:id="@+id/mStreamView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <View
+        android:id="@+id/viewBackground"
+        android:background="@color/background_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:id="@+id/mOther"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:id="@+id/mSnapshootFlash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/text_white"
+            android:visibility="gone"
+            ></RelativeLayout>
+        <TableLayout
+            android:id="@+id/mMoreHub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/transparent_dark"
+            android:padding="8dp"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:src="@mipmap/ic_player" />
+
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/topControlBar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:background="@color/gray_percent_50">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Height: 0m"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:textSize="8sp"/>
+                    <TextView
+                        android:id="@+id/txtDistance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Distance: 0m"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:textSize="8sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtSpeedV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Speed V: 0m/s"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:textSize="8sp"/>
+                    <TextView
+                        android:id="@+id/txtSpeedH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Speed H: 0m/s"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="8dp"
+                        android:textSize="8sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:src="@mipmap/weixing"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="4dp"/>
+                        <TextView
+                            android:id="@+id/txtPlanet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/bg_white"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="2dp"
+                            android:textSize="8sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/txtN"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="N: 0.0"
+                            android:textColor="@color/bg_white"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="8dp"
+                            android:textSize="8sp"/>
+                        <TextView
+                            android:id="@+id/txtE"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="E: 0.0"
+                            android:textColor="@color/bg_white"
+                            android:gravity="center_horizontal"
+                            android:paddingTop="8dp"
+                            android:textSize="8sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtRoll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Roll: 0.0"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="2dp"
+                        android:textSize="8sp"/>
+                    <TextView
+                        android:id="@+id/txtPatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pitch: 0.0"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="4dp"
+                        android:textSize="8sp"/>
+                    <TextView
+                        android:id="@+id/txtYaw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yaw: 0.0"
+                        android:textColor="@color/bg_white"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="4dp"
+                        android:textSize="8sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <ImageButton
+                            android:id="@+id/btnWifi"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@mipmap/main_wifi_4" />
+                        <ImageView
+                            android:id="@+id/imgLock"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:background="@mipmap/lock" />
+                        <ImageView
+                            android:id="@+id/imgBattery"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:background="@mipmap/main_battery_3" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:id="@+id/txtStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/text_white"
+                            android:textSize="8sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/leftPanel"
+                android:layout_width="270dp"
+                android:layout_height="250dp"
+                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/imgOilPanel"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/main_oilpanel" />
+
+                <ImageView
+                    android:id="@+id/btnOilPoint"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/main_point" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rightPanel"
+                android:layout_width="270dp"
+                android:layout_height="250dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/imgGSensorPanel"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/main_gsensorpanel" />
+                <ImageView
+                    android:id="@+id/btnGSensorPoint"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/main_point" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/leftControlBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/topControlBar"
+                tools:ignore="DisableBaselineAlignment">
+
+                <ImageButton
+                    android:id="@+id/btnRecorder"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/main_recorder"/>
+
+                <ImageView
+                    android:id="@+id/txtRecorderRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_red_dot"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@null"
+                    android:layout_toRightOf="@id/btnRecorder"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/txtRecorderTime"
+                    android:layout_width="200dp"
+                    android:layout_height="20dp"
+                    android:layout_toRightOf="@id/txtRecorderRed"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="16dp"
+                    android:text="00:00:00"
+                    android:textColor="@color/text_red"
+                    android:visibility="gone"
+                    />
+
+                <ImageButton
+                    android:id="@+id/btnTakePhoto"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="52dp"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_snapshot"/>
+
+                <ImageButton
+                    android:id="@+id/btnHidePanel"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="94dp"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_joystick_switch_sel"/>
+
+                <ImageButton
+                    android:id="@+id/btnPhotos"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_photos"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rightControlBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/topControlBar"
+                android:layout_alignParentEnd="true">
+
+                <ImageButton
+                    android:id="@+id/btnMore"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@mipmap/main_hide_views"/>
+                <ImageButton
+                    android:id="@+id/btnGSensor"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="52dp"
+                    android:background="@mipmap/main_gsensor"/>
+                <ImageButton
+                    android:id="@+id/btnSensorSetting"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="94dp"
+                    android:background="@mipmap/main_sensor_setting"/>
+
+                <ImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_settings" />
+
+
+                <ImageView
+                    android:id="@+id/left_bar_adjust_resolution_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/drawable_resolution_hd"/>
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/bottomControlBar"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true">
+                <Switch
+                    android:id="@+id/switchLock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:switchMinWidth="20dp"
+                    android:layout_marginLeft="0dp"
+                    android:thumb="@drawable/thumb"
+                    android:track="@drawable/track"
+                    android:textOn=""
+                    android:textOff=""/>
+                <ImageButton
+                    android:id="@+id/btnLandingOrTakeoff"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@id/switchLock"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_takeoff_landing"/>
+                <ImageButton
+                    android:id="@+id/btnFlyBack"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@id/btnLandingOrTakeoff"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_voyage_home"/>
+
+                <ImageButton
+                    android:id="@+id/btnSpeed"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@id/btnFlyBack"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:background="@mipmap/main_speed_h"/>
+            </RelativeLayout>
+
+            <!--android:visibility="gone"-->
+            <RelativeLayout
+                android:id="@+id/centerSensorPanel"
+                android:layout_width="310dp"
+                android:layout_height="170dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_corner10"
+                android:alpha="1.0"
+                android:visibility="gone"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/shape_corner_setting_title"
+                    android:alpha="1.0"
+                    ></RelativeLayout>
+                <TextView
+                    android:id="@+id/txtSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/text_white"
+                    android:text="@string/sensor_panel_settting" />
+
+
+                <TextView
+                    android:id="@+id/txtBrightness"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/sensor_panel_brightness" />
+                <TextView
+                    android:id="@+id/txtBrightnessValue"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="41dp"
+                    android:layout_toRightOf="@id/txtBrightness"
+                    android:textSize="13sp"
+                    android:text="0" />
+                <SeekBar
+                    android:id="@+id/seekBarBrightness"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_alignTop="@id/txtBrightness"
+                    android:layout_toRightOf="@id/txtBrightnessValue"
+                    android:layout_marginTop="-5dp"
+                    android:maxHeight="3dip"
+                    android:progress="128"
+                    android:max="255"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/setting_panel_title"
+                    android:layout_alignBottom="@id/seekBarBrightness"
+                    ></RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtExposure"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="71dp"
+                    android:text="@string/sensor_panel_exposure" />
+                <TextView
+                    android:id="@+id/txtExposureValue"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="72dp"
+                    android:layout_toRightOf="@id/txtExposure"
+                    android:textSize="13sp"
+                    android:text="0" />
+                <SeekBar
+                    android:id="@+id/seekBarExposure"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtExposure"
+                    android:layout_toRightOf="@id/txtExposureValue"
+                    android:maxHeight="3dip"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-5dp"
+                    android:progress="3"
+                    android:max="6"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/setting_panel_title"
+                    android:layout_alignBottom="@id/seekBarExposure"
+                    ></RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtContrast"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="102dp"
+                    android:text="@string/sensor_panel_contrast" />
+                <TextView
+                    android:id="@+id/txtContrastValue"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="103dp"
+                    android:layout_toRightOf="@id/txtContrast"
+                    android:textSize="13sp"
+                    android:text="255" />
+                <SeekBar
+                    android:id="@+id/seekBarContrast"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtContrast"
+                    android:layout_toRightOf="@id/txtContrastValue"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-5dp"
+                    android:maxHeight="3dip"
+                    android:progress="255"
+                    android:max="511"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/setting_panel_title"
+                    android:layout_alignBottom="@id/seekBarContrast"
+                    ></RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtWhiteBalance"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="133dp"
+                    android:textSize="12dp"
+                    android:text="@string/sensor_panel_white_balance" />
+                <TextView
+                    android:id="@+id/txtWhiteBalanceValue"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="134dp"
+                    android:layout_toRightOf="@id/txtWhiteBalance"
+                    android:textSize="13sp"
+                    android:text="0" />
+                <SeekBar
+                    android:id="@+id/seekBarWhiteBalance"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/txtWhiteBalance"
+                    android:layout_toRightOf="@id/txtWhiteBalanceValue"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-5dp"
+                    android:maxHeight="3dip"
+                    android:progress="0"
+                    android:max="4"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

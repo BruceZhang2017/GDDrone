@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@mipmap/ic_seek_bar_progress_thumb"
+        android:width="26dp" android:height="26dp"
+        android:state_pressed="true"/>
+
+    <item android:drawable="@mipmap/ic_seek_bar_progress_thumb"
+        android:width="22dp" android:height="22dp"/>
+
+</selector>

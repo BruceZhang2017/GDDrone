@@ -1,0 +1,11 @@
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=No Name
+c=IN IP4 127.0.0.1
+t=0 0
+m=audio 1234 RTP/AVP 97
+a=rtpmap:97 L16/8000/1
+a=ptime:20
+m=video 6666 RTP/AVP 26
+a=rtpmap:26 JPEG/90000
+a=framerate:30

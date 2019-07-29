@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jieli.stream.dv.gdxxx.ui.fragment.browse.DevPhotoFragment">
+
+    <RelativeLayout
+        android:id="@+id/dev_photo_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/bg_video_state">
+
+        <RelativeLayout
+            android:id="@+id/dev_photo_edit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/dev_photo_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                android:text="@string/all_select"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:id="@+id/dev_photo_exit_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:text="@string/dialog_exit"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:id="@+id/dev_photo_select_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/dev_photo_exit_mode"
+                android:layout_toRightOf="@+id/dev_photo_select_all"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/selected_num"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/dev_photo_normal_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/dev_photo_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_return_press"
+                android:padding="5dp" />
+
+            <ImageView
+                android:id="@+id/dev_photo_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:contentDescription="@null"
+                android:padding="5dp"
+                android:src="@mipmap/ic_edit_white" />
+
+            <TextView
+                android:id="@+id/dev_photo_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/dev_photo_edit"
+                android:layout_toRightOf="@+id/dev_photo_return"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/dev_gallery"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_normal" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/dev_photo_bottom_bar"
+        layout="@layout/pop_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+    <com.jieli.stream.dv.gdxxx.ui.widget.pullrefreshview.layout.PullRefreshLayout
+        android:id="@+id/dev_photo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/dev_photo_bottom_bar"
+        android:layout_below="@+id/dev_photo_top_bar"
+        android:layout_marginBottom="@dimen/setting_marginTop">
+
+        <include
+            android:id="@+id/view_empty"
+            layout="@layout/view_empty"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/dev_photo_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:divider="@color/text_transparent"
+            android:listSelector="@color/text_transparent"
+            android:scrollbars="none" />
+
+        <com.jieli.stream.dv.gdxxx.ui.widget.pullrefreshview.view.ExpandFooterView
+            android:id="@+id/dev_photo_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.jieli.stream.dv.gdxxx.ui.widget.pullrefreshview.layout.PullRefreshLayout>
+
+
+</RelativeLayout>

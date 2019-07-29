@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/item_image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_default_picture"
+        android:contentDescription="@null"/>
+
+    <RelativeLayout
+        android:id="@+id/item_image_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="3dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/bg_video_state"
+        android:layout_alignBottom="@+id/item_image_iv"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_small_camera"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/item_image_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="6dp"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_smaller_x"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+</RelativeLayout>

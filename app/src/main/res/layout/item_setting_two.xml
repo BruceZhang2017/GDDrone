@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_bg_view"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/item_setting_two_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/text_black"
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/item_setting_two_tv2"/>
+
+    <TextView
+        android:id="@+id/item_setting_two_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_smaller_x"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:layout_toLeftOf="@+id/item_setting_two_icon"/>
+
+    <ImageView
+        android:id="@+id/item_setting_two_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_right_arrow"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/company"/>
+
+</RelativeLayout>

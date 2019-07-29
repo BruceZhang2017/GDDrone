@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/button_bg_press">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_bg_view"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/item_setting_three_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_small" />
+
+        <TextView
+            android:id="@+id/item_setting_three_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/item_setting_three_tv1"
+            android:layout_toRightOf="@id/item_setting_three_tv1"
+            android:padding="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_smaller_x" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

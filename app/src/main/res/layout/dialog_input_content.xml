@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <TextView
+        android:id="@+id/create_dir_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="@string/input_new_dir_name"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/text_normal" />
+
+    <EditText
+        android:id="@+id/dialog_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_dir_title_tv"
+        android:layout_centerInParent="true"
+        android:layout_margin="3dp"
+        android:inputType="textCapSentences"
+        android:padding="10dp" />
+
+    <!--
+        <TextView
+            android:id="@+id/dialog_notify_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="right" />
+    -->
+
+    <LinearLayout
+        android:id="@+id/dialog_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/text_gray"
+        android:orientation="horizontal"
+        android:paddingTop="1dp">
+
+        <Button
+            android:id="@+id/dialog_input_cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_bt_bg"
+            android:text="@string/dialog_cancel"
+            tools:ignore="ButtonStyle" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/dialog_input_confirm_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/dialog_bt_bg"
+            android:text="@string/dialog_confirm"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+
+</RelativeLayout>
