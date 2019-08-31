@@ -28,14 +28,14 @@ public class FlyLockModel {
         mSerialData[7] = checkSum(mSerialData);
 
         ArrayMap aParam = new ArrayMap();
-        aParam.put("D0",mSerialData[0]+"");
-        aParam.put("D1", mSerialData[1]+"");
-        aParam.put("D2", mSerialData[2]+"");
-        aParam.put("D3", mSerialData[3]+"");
-        aParam.put("D4", mSerialData[4]+"");
-        aParam.put("D5", mSerialData[5]+"");
-        aParam.put("D6", mSerialData[6]+"");
-        aParam.put("D7", mSerialData[7]+"");
+        aParam.put("D0",btou(mSerialData[0])+"");
+        aParam.put("D1", btou(mSerialData[1])+"");
+        aParam.put("D2", btou(mSerialData[2])+"");
+        aParam.put("D3", btou(mSerialData[3])+"");
+        aParam.put("D4", btou(mSerialData[4])+"");
+        aParam.put("D5", btou(mSerialData[5])+"");
+        aParam.put("D6", btou(mSerialData[6])+"");
+        aParam.put("D7", btou(mSerialData[7])+"");
 
         for(int i=0;i<8;i++){
             String string = (String) aParam.get("D"+i);
@@ -43,5 +43,12 @@ public class FlyLockModel {
         }
 
         return aParam;
+    }
+
+    public static final int btou(byte b) {
+        if (b >= 0)
+            return (b + 0);
+        else
+            return (256 + b);
     }
 }

@@ -1,7 +1,10 @@
 package com.jieli.stream.dv.gdxxx.ui.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.Sensor;
@@ -29,6 +33,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -62,8 +67,11 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.CoordinateConverter;
 import com.jieli.lib.dv.control.DeviceClient;
 import com.jieli.lib.dv.control.connect.listener.OnConnectStateListener;
 import com.jieli.lib.dv.control.connect.response.SendResponse;
@@ -119,6 +127,8 @@ import com.jieli.stream.dv.gdxxx.util.WifiP2pHelper;
 import com.nineoldandroids.view.ViewHelper;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,15 +170,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     private RelativeLayout leftPanel;
     private RelativeLayout rightPanel;
 
+    private TextView tvTemp;
     private TextView tvDistance;
     private TextView tvSpeedV;
     private TextView tvSpeedH;
     private TextView tvPlanet;
-    private TextView tvE;
-    private TextView tvN;
-    private TextView tvRoll;
-    private TextView tvPatch;
-    private TextView tvYaw;
     private ImageView ivLock;
     private Switch mSwitch;
 
@@ -206,15 +212,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     private int threshold;
     private int fps;
 
+    private int kDeadValue = 200;
+
     private static final long DELAY_TIME = 100L;
 
     private static final int MSG_TAKE_VIDEO = 0x0a00;
     private static final int MSG_TAKE_PHOTO = 0x0a01;
     private static final int MSG_FPS_COUNT = 0x0a05;
     private static final int MSG_BACEPRESSED = 0x0a87;
-
-    private boolean isLandingOrTakeOff = false; // 起飞或返航
-    private boolean bHomeWard = false; // 一键返航
 
     private boolean isGSensor = false;
     TextView txtStatus, txtRecorderTime;
@@ -226,6 +231,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     ImageView btnOilPoint, btnGSensorPoint;
     RelativeLayout centerSensorPanel;
     ImageView imgBattery;
+    RelativeLayout rl_comprass;
+    ImageView iv_arrow;
+    ImageView iv_top_left_bg;
     boolean isHeadless = false;
 
     private static final int MSG_RECONNECTION_DEVICE = 0;
@@ -240,11 +248,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     private LocationService locationService;
     int latitude; // 纬度
     int longitude; // 经度
-    private boolean isFollow = false; // 是否跟随
-    private boolean temSwitch = false;
+    int latitudeB;
+    int longitudeB;
+    private boolean temSwitchHiden = true;
+
+    private boolean gpsStarting = false;
+
+    int flyType = 0; // 飞机模式
+    int flyStatus = 0; // 飞机状态
+
+    int flyBackCount = 0; // 一键返航执行次数，不超过3次
+    int cancelFlyBackCount = 0; // 取消一键返航执行次数，不超过3次
+    int flyFollowCount = 0; // GPS跟随执行次数，不超过3次
+    int cancelFlyFollowCount = 0; // 取消GPS跟随执行次数，不超过3次
+    int flyUpCount = 0; // 一键起飞执行次数，不超过3次
+    int flyDownCount = 0; // 一键降落执行次数，不超过3次
 
     //ljw
-    int radius = 120;//圆半径
+    int radius = 80;//圆半径
     private Handler delayHandler = new Handler();
     private static int speedLevel = PreferencesHelper.SPEED_LEVEL_L;
     //private
@@ -315,30 +336,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                                     }
                                 });
                             }
-                            //方法二
-//                            if (mVideoCapture == null) {
-//                                mVideoCapture = new VideoCapture();
-//                                mVideoCapture.setOnCaptureListener(new OnVideoCaptureListener() {
-//                                    @Override
-//                                    public void onCompleted() {
-//                                        isCaptureBusying_Main=false;
-//                                        mTakePictureCount--;
-//                                        isCaptureBusying = false;
-////                                        MainActivity.this.runOnUiThread(new Runnable() {
-////                                            @Override
-////                                            public void run() {
-////                                                a.getApplication().showToastShort(R.string.success_photo);
-////                                            }
-////                                        });
-//                                    }
-//                                    @Override
-//                                    public void onFailed() {
-//                                        isCaptureBusying_Main=false;
-//                                        isCaptureBusying = false;
-//                                        //a.getApplication().showToastShort(R.string.failure_photo);
-//                                    }
-//                                });
-//                            }
                             shootSound();
                         } else {
                             if (!isAdjustResolution) {
@@ -375,28 +372,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                                 mTryConnectCount++;
                                 tryConnectWifiDevice();
                             }
-//                            reConnectNum++;
-//                            if (reConnectNum < 3) {
-//                                SharedPreferences sharedPreferences = PreferencesHelper.getSharedPreferences(getApplicationContext());
-//                                String saveSSID = sharedPreferences.getString(CURRENT_WIFI_SSID, null);
-//                                if(!TextUtils.isEmpty(saveSSID)){
-//                                    isReConnectDev = true;
-//                                    String savePwd = sharedPreferences.getString(saveSSID, null);
-//                                    showWaitingDialog();
-//                                    int reconnectType = sharedPreferences.getInt(RECONNECT_TYPE, 0);
-//                                    if(reconnectType == 1){
-//                                        mHandler.sendEmptyMessage(MSG_STOP_RECONNECTION_DEVICE);
-//                                    }else {
-//                                        mWifiHelper.connectWifi(mApplication, saveSSID, savePwd);
-//                                    }
-//                                }else{
-//                                    mHandler.sendEmptyMessage(MSG_STOP_RECONNECTION_DEVICE);
-//                                }
-//                            } else {
-//                                Dbug.i(tag, "stop reconnect ");
-//                                showReconnectionDialog();
-//                                mHandler.sendEmptyMessage(MSG_STOP_RECONNECTION_DEVICE);
-//                            }
                         } else {
                             showOpenWifiDialog();
                         }
@@ -530,7 +505,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
         leftPanel = (RelativeLayout) findViewById(R.id.leftPanel);
         rightPanel = (RelativeLayout) findViewById(R.id.rightPanel);
-
+        rl_comprass = (RelativeLayout) findViewById(R.id.rl_comprass);
+        iv_arrow = (ImageView) findViewById(R.id.iv_arrow);
+        rl_comprass.setRotation(-90);
+        iv_arrow.setRotation(90);
+        iv_top_left_bg = (ImageView) findViewById(R.id.iv_top_left_bg);
 
         mAdjustResolutionBtn = (ImageView) findViewById(R.id.left_bar_adjust_resolution_btn);
 
@@ -547,82 +526,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
         mMoreHub = (TableLayout) findViewById(R.id.mMoreHub);
         viewBackground = (View) findViewById(R.id.viewBackground);
-        txtStatus = (TextView) findViewById(R.id.txtStatus);
-        tvDistance = (TextView) findViewById(R.id.txtDistance);
-        tvSpeedV = (TextView) findViewById(R.id.txtSpeedV);
-        tvSpeedH = (TextView) findViewById(R.id.txtSpeedH);
-        tvPlanet = (TextView) findViewById(R.id.txtPlanet);
-        tvE = (TextView) findViewById(R.id.txtE);
-        tvN = (TextView) findViewById(R.id.txtN);
-        tvRoll = (TextView) findViewById(R.id.txtRoll);
-        tvPatch = (TextView) findViewById(R.id.txtPatch);
-        tvYaw = (TextView) findViewById(R.id.txtYaw);
-        ivLock = (ImageView) findViewById(R.id.imgLock);
-        mSwitch = (Switch) findViewById(R.id.switchLock);
-        mSwitch.setVisibility(View.INVISIBLE);
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (!b) {
-                    if (temSwitch) {
-                        temSwitch = false;
-                        return;
-                    }
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                    // 设置提示框的标题
-                    builder.setTitle("提示").
-                            // 设置要显示的信息
-                                    setMessage("上锁将导致电机急停，飞机下坠，确定要上锁？").
-                            // 设置确定按钮
-                                    setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //do something
-                                    RequestCmd aNewCmd = new RequestCmd();
-                                    aNewCmd.setTopic("GENERIC_CMD");
-                                    aNewCmd.setOperation("PUT");
-                                    aNewCmd.setParams(FlyLockModel.getFlyCtrlDataMap((byte) 0x01)); // 降落
-                                    ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
-                                        @Override
-                                        public void onResponse(Integer integer) {
-                                            if (integer == SEND_SUCCESS) {
-                                                Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
-                                            } else {
-                                                Log.i(tag, "GENERIC_CMD SEND_Fail");
-                                            }
-                                        }
-                                    });
-                                }
-                            }).
-                            // 设置取消按钮,null是什么都不做
-                                    setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    mSwitch.setChecked(true);
-                                }
-                            });
-                    // 生产对话框
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                } else {
-                    RequestCmd aNewCmd = new RequestCmd();
-                    aNewCmd.setTopic("GENERIC_CMD");
-                    aNewCmd.setOperation("PUT");
-                    aNewCmd.setParams(FlyLockModel.getFlyCtrlDataMap((byte) 0x00)); // 降落
-                    ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
-                        @Override
-                        public void onResponse(Integer integer) {
-                            if (integer == SEND_SUCCESS) {
-                                Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
-                            } else {
-                                Log.i(tag, "GENERIC_CMD SEND_Fail");
-                            }
-                        }
-                    });
-                }
-            }
-        });
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/BITSUMISHIPROBOOK_0.OTF");
+        tvTemp = (TextView)findViewById(R.id.tv_temp);
+        //txtStatus = (TextView) findViewById(R.id.txtStatus);
+        tvDistance = (TextView) findViewById(R.id.txtDistance);
+        tvDistance.setTypeface(custom_font);
+        tvSpeedV = (TextView) findViewById(R.id.txtSpeedV);
+        tvSpeedV.setTypeface(custom_font);
+        tvSpeedH = (TextView) findViewById(R.id.txtSpeedH);
+        tvSpeedH.setTypeface(custom_font);
+        tvPlanet = (TextView) findViewById(R.id.txtPlanet);
+        tvPlanet.setTypeface(custom_font);
+        ivLock = (ImageView) findViewById(R.id.imgLock);
+        ivLock.setImageResource(R.mipmap.lock);
+        mSwitch = (Switch) findViewById(R.id.switchLock);
 
         btnWifi = findImageButton_AutoBack(R.id.btnWifi, new View.OnClickListener() {
             @Override
@@ -674,18 +592,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         btnMore = findImageButton_AutoBack(R.id.btnMore, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(leftControlBar.getVisibility() == View.VISIBLE) {
-//                    switchUIBarVisible();
-//                    //可以左右滑动大幅度进行显示和隐藏工具栏等功能。
-//                    //提示信息操作结果等，绿色WIFI图标等。
-//                }
-
-                if (leftPanel.getVisibility() != View.VISIBLE) {
-                    return;
-                }
-
                 follow();
-
             }
         });
         btnGSensor = findImageButton_AutoBack(R.id.btnGSensor, new View.OnClickListener() {
@@ -706,7 +613,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 boolean isSetVisible = centerSensorPanel.getVisibility() == View.GONE;
 
                 if (isSetVisible == false) {
-                    btnSensorSetting.setBackgroundResource(R.mipmap.main_sensor_setting);
+                    btnSensorSetting.setBackgroundResource(R.mipmap.main_sensor_setting_sel);
 
 
                     btnWifi.setEnabled(true);
@@ -722,10 +629,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
                     btnLandingOrTakeoff.setEnabled(true);
                     btnFlyBack.setEnabled(true);
-                    btnSpeed.setEnabled(true);
+                    btnSpeed.setEnabled(false);
 
                     btnOilPoint.setEnabled(true);
                     btnGSensorPoint.setEnabled(true);
+
                 } else {
                     //显示的时候才初始化值。
 
@@ -767,7 +675,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     }
                     seekBarWhiteBalance.setProgress(iProgress);
 
-                    btnSensorSetting.setBackgroundResource(R.mipmap.main_sensor_setting_sel);
+                    btnSensorSetting.setBackgroundResource(R.mipmap.main_sensor_setting);
 
 
                     btnWifi.setEnabled(false);
@@ -809,13 +717,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 }
                 a.getApplication().showToastShort(R.string.one_key_fly);
                 //ljw
-                if (isLandingOrTakeOff) {
-                    isLandingOrTakeOff = false;
-                    btnLandingOrTakeoff.setBackgroundResource(R.mipmap.main_takeoff_landing);
+                if (flyStatus == 2) {
                     RequestCmd aNewCmd = new RequestCmd();
                     aNewCmd.setTopic("GENERIC_CMD");
                     aNewCmd.setOperation("PUT");
-                    aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x01)); // 降落
+                    aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x02)); // 降落
                     ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
                         @Override
                         public void onResponse(Integer integer) {
@@ -827,12 +733,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                         }
                     });
                 } else {
-                    isLandingOrTakeOff = true;
-                    btnLandingOrTakeoff.setBackgroundResource(R.mipmap.main_landing);
                     RequestCmd aNewCmd = new RequestCmd();
                     aNewCmd.setTopic("GENERIC_CMD");
                     aNewCmd.setOperation("PUT");
-                    aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x02)); // 起飞
+                    aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x01)); // 起飞
                     ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
                         @Override
                         public void onResponse(Integer integer) {
@@ -854,80 +758,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 if (checkConnected() == false) {
                     return;
                 }
-                a.getApplication().showToastShort(R.string.one_key_return);
-
-                if (bHomeWard) {
-                    bHomeWard = false;
-                    btnFlyBack.setBackgroundResource(R.mipmap.main_voyage_home);
-                    RequestCmd aNewCmd = new RequestCmd();
-                    aNewCmd.setTopic("GENERIC_CMD");
-                    aNewCmd.setOperation("PUT");
-                    aNewCmd.setParams(FlyHoverModel.getFlyCtrlDataMap()); // 悬停
-                    ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
-                        @Override
-                        public void onResponse(Integer integer) {
-                            if (integer == SEND_SUCCESS) {
-                                Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
-                            } else {
-                                Log.i(tag, "GENERIC_CMD SEND_Fail");
-                            }
-                        }
-                    });
-                } else {
-                    bHomeWard = true;
-                    btnFlyBack.setBackgroundResource(R.mipmap.main_voyage_home01);
-                    RequestCmd aNewCmd = new RequestCmd();
-                    aNewCmd.setTopic("GENERIC_CMD");
-                    aNewCmd.setOperation("PUT");
-                    aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x08)); // 一键返航
-                    ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
-                        @Override
-                        public void onResponse(Integer integer) {
-                            if (integer == SEND_SUCCESS) {
-                                Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
-                            } else {
-                                Log.i(tag, "GENERIC_CMD SEND_Fail");
-                            }
-                        }
-                    });
-                }
+                //a.getApplication().showToastShort(R.string.one_key_return);
+                flyback();
             }
         });
         btnSpeed = findImageButton_AutoBack(R.id.btnSpeed, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkConnected() == false) {
-                    return;
-                }
-                speedLevel = PreferencesHelper.getSpeedLevelValue(MainActivity.this);
-                if (speedLevel == PreferencesHelper.SPEED_LEVEL_L) {
-                    btnSpeed.setBackgroundResource(R.mipmap.main_speed_m);
-                    speedLevel = PreferencesHelper.SPEED_LEVEL_M;
-                    //FlyData.setSpeedMiddle();
-                } else if (speedLevel == PreferencesHelper.SPEED_LEVEL_M) {
-                    btnSpeed.setBackgroundResource(R.mipmap.main_speed_h);
-                    speedLevel = PreferencesHelper.SPEED_LEVEL_H;
-                    //FlyData.setSpeedHigh();
-                } else if (speedLevel == PreferencesHelper.SPEED_LEVEL_H) {
-                    btnSpeed.setBackgroundResource(R.mipmap.main_speed_l);
-                    speedLevel = PreferencesHelper.SPEED_LEVEL_L;
-                    //FlyData.setSpeedLow();
-                }
-                PreferencesHelper.putSpeedLevelValue(MainActivity.this, speedLevel);
+
             }
         });
 
         speedLevel = PreferencesHelper.getSpeedLevelValue(this);
-        if (speedLevel == PreferencesHelper.SPEED_LEVEL_L) {
-            btnSpeed.setBackgroundResource(R.mipmap.main_speed_l);
-            //FlyData.setSpeedLow();
-        } else if (speedLevel == PreferencesHelper.SPEED_LEVEL_M) {
-            btnSpeed.setBackgroundResource(R.mipmap.main_speed_m);
-            //FlyData.setSpeedMiddle();
-        } else if (speedLevel == PreferencesHelper.SPEED_LEVEL_H) {
-            btnSpeed.setBackgroundResource(R.mipmap.main_speed_h);
-            //FlyData.setSpeedHigh();
-        }
 
         btnSettings = findImageButton_AutoBack(R.id.btnSettings, new View.OnClickListener() {
             @Override
@@ -948,20 +790,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         //btnGSensorPoint.setX
 
         ClientManager.getClient().registerNotifyListener(onNotifyListener);
-        //registerBroadcast();
-
-//        SettingCmd aNewCmd = new SettingCmd();
-//        aNewCmd.setTopic("GENERIC_CMD");
-//        aNewCmd.setOperation("PUT");
-//        ArrayMap lNewParam = new ArrayMap();
-//
-//        aNewCmd.setParams(lNewParam);
-//        ClientManager.getClient().tryToPut(aNewCmd, new SendResponse() {
-//            @Override
-//            public void onResponse(Integer code) {
-//
-//            }
-//        });
 
         mLeftCenterX = ViewHelper.getTranslationX(btnOilPoint);
         mLeftCenterY = ViewHelper.getTranslationY(btnOilPoint);
@@ -971,10 +799,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 if (btnOilPoint.isEnabled() == false) {
                     return true;
                 }
-                if (isFollow) { // 如果是跟随，则取消跟随
-                    follow();
-                }
-
+//                if (flyType == 0x06) { // 如果是跟随，则取消跟随
+//                    follow();
+//                }
                 //获取屏幕的位置 xy值
                 float tempX = event.getRawX();
                 float tempY = event.getRawY();
@@ -984,75 +811,47 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     case MotionEvent.ACTION_MOVE:
                         float deltaX = tempX - mLeftManualLastX;
                         float deltaY = tempY - mLeftManualLastY;
-                        Log.i("dali", "move:deltaX:" + deltaX + ",deltaY:" + deltaY);
+
                         float translationX = (ViewHelper.getTranslationX(btnOilPoint) + deltaX);
                         float translationY = (ViewHelper.getTranslationY(btnOilPoint) + deltaY);
-                        double iDistance = getDistanceFromPoint(translationX, translationY, mLeftCenterX, mLeftCenterY);
-
-                        //ljw
-
-                        if (iDistance < radius) {
-                            ViewHelper.setTranslationX(btnOilPoint, translationX);
-                            ViewHelper.setTranslationY(btnOilPoint, translationY);
-
-                            float rawX = translationX;
-                            float rawY = translationY;
-
-                            int x = 0;
-                            int y = 0;
-
-                            if (rawX < 0) {
-                                x = (int) ((rawX * FlyData.MIDDLE / radius) - 0.5);
-                            } else {
-                                x = (int) ((rawX * FlyData.MIDDLE / radius) + 0.5);
-                            }
-
-                            if (rawY < 0) {
-                                y = (int) ((rawY * FlyData.MIDDLE / radius) - 0.5);
-                            } else {
-                                y = (int) ((rawY * FlyData.MIDDLE / radius) + 0.5);
-                            }
-
-                            x = x + FlyData.MIDDLE;
-                            y = -y + FlyData.MIDDLE;
-
-                            if (x > 255)
-                                x = 255;
-                            if (y > 255)
-                                y = 255;
-
-                            Log.i("leftRocker move xy", "xx:" + x + ",yy:" + y);
-
-                            FlyData.rudderData[3] = y;
-                            FlyData.rudderData[4] = x;
+                        double iDistance = getDistanceFromPoint(translationX, translationY, 0, 0);
+                        if (iDistance > radius) {
+                            float radian = calulateAngleLinePointA(translationX, translationY, 0, 0);
+                            translationX = (float)(Math.cos(radian)*radius);
+                            translationY = (float)(Math.sin(radian)*radius);
                         }
 
-                        //                        if(iDistance<120) {
-//                            ViewHelper.setTranslationX(btnOilPoint, translationX);
-//                            ViewHelper.setTranslationY(btnOilPoint, translationY);
-//
-//
-//                            SettingCmd aNewCmd = new SettingCmd();
-//                            aNewCmd.setTopic("GENERIC_CMD");
-//                            aNewCmd.setOperation("PUT");
-//                            ClientManager.getClient().tryToPut(aNewCmd, new SendResponse() {
-//                                @Override
-//                                public void onResponse(Integer code) {
-//                                    if (code != SEND_SUCCESS) {
-//
-//                                    }else{
-//
-//                                    }
-//                                }
-//                            });
-//                        }
+                        ViewHelper.setTranslationX(btnOilPoint, translationX);
+                        ViewHelper.setTranslationY(btnOilPoint, translationY);
+
+                        float x = ViewHelper.getTranslationX(btnOilPoint);
+                        float y = ViewHelper.getTranslationY(btnOilPoint);
+
+                        int valueX = (int)(x * 1000 / radius);
+                        int valueY = (int)(y * 1000 / radius);
+
+                        if ((valueX < kDeadValue && valueX > -kDeadValue) && (valueY > kDeadValue || valueY < -kDeadValue)) {
+                            valueX = 0;
+                        }
+                        if ((valueY < kDeadValue && valueY > -kDeadValue) && (valueX > kDeadValue || valueX < -kDeadValue)) {
+                            valueY = 0;
+                        }
+                        if ((valueX < kDeadValue && valueX > -kDeadValue) && (valueY < kDeadValue && valueY > -kDeadValue)) {
+                            valueX = 0;
+                            valueY = 0;
+                        }
+
+                        Log.d("data2", "valueX:" + valueX);
+                        FlyData.rudderData[3] = valueY;
+                        FlyData.rudderData[4] = valueX;
+
                         break;
                     case MotionEvent.ACTION_UP:
                         ViewHelper.setTranslationX(btnOilPoint, mLeftCenterX);
                         ViewHelper.setTranslationY(btnOilPoint, mLeftCenterY);
 
-                        FlyData.rudderData[3] = FlyData.MIDDLE;
-                        FlyData.rudderData[4] = FlyData.MIDDLE;
+                        FlyData.rudderData[3] = 0;
+                        FlyData.rudderData[4] = 0;
                         break;
                     default:
                         break;
@@ -1076,9 +875,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 if (btnGSensorPoint.isEnabled() == false) {
                     return true;
                 }
-                if (isFollow) { // 如果是跟随，则取消跟随
-                    follow();
-                }
                 //获取屏幕的位置 xy值
                 float tempX = event.getRawX();
                 float tempY = event.getRawY();
@@ -1089,54 +885,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                         if (isGSensor == false) {
                             float deltaX = tempX - mRightManualLastX;
                             float deltaY = tempY - mRightManualLastY;
-                            Log.i("dali", "move:deltaX:" + deltaX + ",deltaY:" + deltaY);
                             float translationX = (ViewHelper.getTranslationX(btnGSensorPoint) + deltaX);
                             float translationY = (ViewHelper.getTranslationY(btnGSensorPoint) + deltaY);
-                            double iDistance = getDistanceFromPoint(translationX, translationY, mRightCenterX, mRightCenterY);
-                            if (iDistance < radius) {
-                                ViewHelper.setTranslationX(btnGSensorPoint, translationX);
-                                ViewHelper.setTranslationY(btnGSensorPoint, translationY);
-
-
-                                float rawX = translationX;
-                                float rawY = translationY;
-
-                                int x = 0;
-                                int y = 0;
-
-                                if (rawX < 0) {
-                                    x = (int) ((rawX * FlyData.MIDDLE / radius) - 0.5);
-                                } else {
-                                    x = (int) ((rawX * FlyData.MIDDLE / radius) + 0.5);
-                                }
-
-                                if (rawY < 0) {
-                                    y = (int) ((rawY * FlyData.MIDDLE / radius) - 0.5);
-                                } else {
-                                    y = (int) ((rawY * FlyData.MIDDLE / radius) + 0.5);
-                                }
-
-                                x = x + FlyData.MIDDLE;
-                                y = -y + FlyData.MIDDLE;
-
-                                if (x > 255)
-                                    x = 255;
-                                if (y > 255)
-                                    y = 255;
-
-                                FlyData.rudderData[1] = x;
-                                FlyData.rudderData[2] = y;
-
-                                Dbug.i(tag, "@rudderData-1-x:" + x + " y:" + y);
+                            double iDistance = getDistanceFromPoint(translationX, translationY, 0, 0);
+                            if (iDistance > radius) {
+                                float radian = calulateAngleLinePointA(translationX, translationY, 0, 0);
+                                translationX = (float)(Math.cos(radian)*radius);
+                                translationY = (float)(Math.sin(radian)*radius);
                             }
+                            ViewHelper.setTranslationX(btnGSensorPoint, translationX);
+                            ViewHelper.setTranslationY(btnGSensorPoint, translationY);
+
+                            float x = ViewHelper.getTranslationX(btnGSensorPoint);
+                            float y = ViewHelper.getTranslationY(btnGSensorPoint);
+
+                            int valueX = (int)(x * 1000 / radius);
+                            int valueY = (int)(y * 1000 / radius);
+
+                            if ((valueX < kDeadValue && valueX > -kDeadValue) && (valueY > kDeadValue || valueY < -kDeadValue)) {
+                                valueX = 0;
+                            }
+                            if ((valueY < kDeadValue && valueY > -kDeadValue) && (valueX > kDeadValue || valueX < -kDeadValue)) {
+                                valueY = 0;
+                            }
+                            if ((valueX < kDeadValue && valueX > -kDeadValue) && (valueY < kDeadValue && valueY > -kDeadValue)) {
+                                valueX = 0;
+                                valueY = 0;
+                            }
+
+                            FlyData.rudderData[1] = valueX;
+                            FlyData.rudderData[2] = valueY;
+                            Log.i("dali2", "move:deltaX:" + valueX + ",deltaY:" + valueY);
                         }
                         break;
                     case MotionEvent.ACTION_UP:
                         ViewHelper.setTranslationX(btnGSensorPoint, mRightCenterX);
                         ViewHelper.setTranslationY(btnGSensorPoint, mRightCenterY);
 
-                        FlyData.rudderData[1] = FlyData.MIDDLE;
-                        FlyData.rudderData[2] = FlyData.MIDDLE;
+                        FlyData.rudderData[1] = 0;
+                        FlyData.rudderData[2] = 0;
                         break;
                     default:
                         break;
@@ -1370,7 +1157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         });
 
         txtHeight = (TextView) findViewById(R.id.txtHeight);
-
+        txtHeight.setTypeface(custom_font);
 
         if (mPublicTimer != null) {
             mPublicTimer.invalidate();
@@ -1412,12 +1199,82 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         IntentFilter filter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mHomeWatcherReceiver, filter);
 
-        locationService=new LocationService(getApplicationContext());
+        switchPanelVisible();//默认隐藏
+        getPersimmions();
+
+        //startGPS();
+    }
+
+    private final int SDK_PERMISSION_REQUEST = 127;
+    private String permissionInfo;
+
+    @TargetApi(23)
+    private void getPersimmions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ArrayList<String> permissions = new ArrayList<String>();
+            /***
+             * 定位权限为必须权限，用户如果禁止，则每次进入都会申请
+             */
+            // 定位精确位置
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+            if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            }
+            /*
+             * 读写权限和电话状态权限非必要权限(建议授予)只会申请一次，用户同意或者禁止，只会弹一次
+             */
+            // 读写权限
+            if (addPermission(permissions, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                permissionInfo += "Manifest.permission.WRITE_EXTERNAL_STORAGE Deny \n";
+            }
+            // 读取电话状态权限
+            if (addPermission(permissions, Manifest.permission.READ_PHONE_STATE)) {
+                permissionInfo += "Manifest.permission.READ_PHONE_STATE Deny \n";
+            }
+
+            if (permissions.size() > 0) {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), SDK_PERMISSION_REQUEST);
+            }
+        }
+    }
+
+    @TargetApi(23)
+    private boolean addPermission(ArrayList<String> permissionsList, String permission) {
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
+            if (shouldShowRequestPermissionRationale(permission)){
+                return true;
+            }else{
+                permissionsList.add(permission);
+                return false;
+            }
+
+        }else{
+            return true;
+        }
+    }
+
+    @TargetApi(23)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // TODO Auto-generated method stub
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+    }
+
+    private void startGPS() {
+        locationService =  ((a)getApplication()).locationService;
         locationService.registerListener(mListener);
         //注册监听
         locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-
-        switchPanelVisible();//默认隐藏
+        if (!isopen()){
+            Toast.makeText(MainActivity.this, "GPS没开，请打开定位功能！", Toast.LENGTH_LONG).show();
+            Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(callGPSSettingIntent);
+            return;
+        }
+        locationService.start();
     }
 
     private void sensor() {
@@ -1431,22 +1288,67 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         ViewHelper.setTranslationY(btnGSensorPoint, mRightCenterY);
 
         //ljw
-        FlyData.rudderData[1] = FlyData.MIDDLE;
-        FlyData.rudderData[2] = FlyData.MIDDLE;
+        FlyData.rudderData[1] = 0;
+        FlyData.rudderData[2] = 0;
     }
 
     private void follow() {
-        isFollow = !isFollow;
-        if (isFollow) {
-            startLocation();
-            stopFlyCtrlTimer();
-            startFlyFollowTimer();
-            btnMore.setBackgroundResource(R.mipmap.main_hide_views01);
+        if (flyType == 0x06) {
+            cancelFlyFollowCount++;
+            stopFlyFollowTimer(); // 取消
+            RequestCmd aNewCmd = new RequestCmd();
+            aNewCmd.setTopic("GENERIC_CMD");
+            aNewCmd.setOperation("PUT");
+            aNewCmd.setParams(FlyHoverModel.getFlyCtrlDataMap()); // 悬停
+            ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
+                @Override
+                public void onResponse(Integer integer) {
+                    if (integer == SEND_SUCCESS) {
+                        Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
+                    } else {
+                        Log.i(tag, "GENERIC_CMD SEND_Fail");
+                    }
+                }
+            });
         } else {
-            locationService.stop();
-            stopFlyFollowTimer();
-            startFlyCtrlTimer();
-            btnMore.setBackgroundResource(R.mipmap.main_hide_views);
+            flyFollowCount++;
+            startFlyFollowTimer();
+        }
+    }
+
+    private void flyback() {
+        if (flyType == 0x04) {
+            cancelFlyBackCount++;
+            RequestCmd aNewCmd = new RequestCmd();
+            aNewCmd.setTopic("GENERIC_CMD");
+            aNewCmd.setOperation("PUT");
+            aNewCmd.setParams(FlyHoverModel.getFlyCtrlDataMap()); // 悬停
+            ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
+                @Override
+                public void onResponse(Integer integer) {
+                    if (integer == SEND_SUCCESS) {
+                        Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
+                    } else {
+                        Log.i(tag, "GENERIC_CMD SEND_Fail");
+                    }
+                }
+            });
+        } else {
+            flyBackCount++;
+            RequestCmd aNewCmd = new RequestCmd();
+            aNewCmd.setTopic("GENERIC_CMD");
+            aNewCmd.setOperation("PUT");
+            aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x08)); // 一键返航
+            ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
+                @Override
+                public void onResponse(Integer integer) {
+                    if (integer == SEND_SUCCESS) {
+                        Log.i(tag, "GENERIC_CMD SEND_SUCCESS");
+                    } else {
+                        Log.i(tag, "GENERIC_CMD SEND_Fail");
+                    }
+                }
+            });
         }
     }
 
@@ -1619,7 +1521,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     }
                 });
             }
-        }, 100, 100);//
+        }, 100, 50);//
     }
 
     public void stopFlyCtrlTimer() {
@@ -1654,7 +1556,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     }
                 });
             }
-        }, 100, 100);//
+        }, 100, 60);//
     }
 
     public void stopFlyFollowTimer() {
@@ -1679,7 +1581,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     aNewCmd.setTopic("GENERIC_CMD");
                     aNewCmd.setOperation("PUT");
                     FlyStateModel model = new FlyStateModel();
-                    aNewCmd.setParams(model.getFlyCtrlDataMap());
+                    int distance = (int)getDistance(latitude,longitude,longitudeB,latitudeB);
+                    distance = Math.abs(distance);
+                    if (distance > 300000) {
+                        distance = 0;
+                    }
+                    aNewCmd.setParams(model.getFlyCtrlDataMap(distance * 10));
                     ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
                         @Override
                         public void onResponse(Integer integer) {
@@ -1692,7 +1599,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     });
                 }
             }
-        }, 1000, 1000);
+        }, 1000, 100);
     }
 
 
@@ -2167,37 +2074,257 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                             return;
                         }
                         if (Integer.valueOf(cmd) == 0x65) {
-                            int height = Integer.valueOf(dParams.get("D16")) | (Integer.valueOf(dParams.get("D17")) << 8);
-                            txtHeight.setText("Height: " + String.format("%.1f",height * 0.1) + "m");
-                            int distance = Integer.valueOf(dParams.get("D13")) | (Integer.valueOf(dParams.get("D14")) << 8);
-                            tvDistance.setText("Distance: " + String.format("%.1f",distance * 0.1) + "m");
-                            int speedV = Integer.valueOf(dParams.get("D18"));
-                            tvSpeedV.setText("speed V:" + String.format("%.1f",speedV * 0.1) + "m/s");
-                            int speedH = Integer.valueOf(dParams.get("D15"));
-                            tvSpeedH.setText("speed H:" + String.format("%.1f",speedH * 0.1) + "m/s");
+                            String h1str = dParams.get("D16");
+                            String h2str = dParams.get("D17");
+                            int h1 = 0;
+                            int h2 = 0;
+                            if (!TextUtils.isEmpty(h1str) && TextUtils.isDigitsOnly(h1str)) {
+                                h1 = Integer.valueOf(h1str);
+                                h1 = h1 & 0x000000ff;
+                            }
+                            if (!TextUtils.isEmpty(h2str) && TextUtils.isDigitsOnly(h2str)) {
+                                h2 = Integer.valueOf(h2str);
+                                h2 = h2 << 8;
+                                h2 = h2 & 0x0000ff00;
+                            }
+                            int height = h1 | h2 ;
+                            if (height >= 20000) {
+                                height = 0;
+                            }
+                            float fHeight = (float) (height * 0.1);
+                            txtHeight.setText(String.format("%.1f",fHeight));
+                            String d1Str = dParams.get("D13");
+                            String d2Str = dParams.get("D14");
+                            int d1 = 0;
+                            int d2 = 0;
+                            if (!TextUtils.isEmpty(d1Str) && TextUtils.isDigitsOnly(d1Str)) {
+                                d1 = Integer.valueOf(d1Str);
+                                d1 = d1 & 0x000000ff;
+                            }
+                            if (!TextUtils.isEmpty(d2Str) && TextUtils.isDigitsOnly(d2Str)) {
+                                d2 = Integer.valueOf(d2Str);
+                                d2 = d2 << 8;
+                                d2 = d2 & 0x0000ff00;
+                            }
+                            int distance = d1 | d2;
+                            String speedStr = dParams.get("D18");
+                            int speedV = 0;
+                            if (!TextUtils.isEmpty(speedStr) && TextUtils.isDigitsOnly(speedStr)) {
+                                speedV = Integer.valueOf(speedStr);
+                                speedV = speedV & 0x000000ff;
+                            }
+                            byte sV = (byte)speedV;
+                            float svFloat = (float) (((int)sV) * 0.1);
+                            tvSpeedV.setText(String.format("%.1f", svFloat));
+                            String speedHstr = dParams.get("D15");
+                            int speedH = 0;
+                            if (!TextUtils.isEmpty(speedHstr) && TextUtils.isDigitsOnly(speedHstr)) {
+                                speedH = Integer.valueOf(speedHstr);
+                                speedH = speedH & 0x000000ff;
+                            }
+                            float speedHFloat = (float) (speedH * 0.1 * 3.6);
+                            tvSpeedH.setText(String.format("%.1f",speedHFloat));
                             int planet = Integer.valueOf(dParams.get("D19"));
                             tvPlanet.setText("" + planet);
-                            int latitude = Integer.valueOf(dParams.get("D25")) | (Integer.valueOf(dParams.get("D26")) << 8) | (Integer.valueOf(dParams.get("D27")) << 16) | (Integer.valueOf(dParams.get("D28")) << 24);
-                            tvE.setText("E: " + String.format("%.2f", latitude * 0.0000001));
-                            int longitude = Integer.valueOf(dParams.get("D21")) | (Integer.valueOf(dParams.get("D22")) << 8) | (Integer.valueOf(dParams.get("D23")) << 16) | (Integer.valueOf(dParams.get("D24")) << 24);
-                            tvN.setText("N: " + String.format("%.2f", longitude * 0.0000001));
+                            if (planet < 8) {
+                                iv_top_left_bg.setImageResource(R.mipmap.red);
+                            } else {
+                                iv_top_left_bg.setImageResource(R.mipmap.green);
+                            }
+                            String d25Str = dParams.get("D25");
+                            String d26Str = dParams.get("D26");
+                            String d27Str = dParams.get("D27");
+                            String d28Str = dParams.get("D28");
+                            int d25 = 0;
+                            int d26 = 0;
+                            int d27 = 0;
+                            int d28 = 0;
+                            if (!TextUtils.isEmpty(d25Str) && TextUtils.isDigitsOnly(d25Str)) {
+                                d25 = Integer.valueOf(d25Str);
+                                d25 = d25 & 0x000000ff;
+                            }
+                            if (!TextUtils.isEmpty(d26Str) && TextUtils.isDigitsOnly(d26Str)) {
+                                d26 = Integer.valueOf(d26Str);
+                                d26 = d26 & 0x000000ff;
+                                d26 = d26 << 8;
+                            }
+                            if (!TextUtils.isEmpty(d27Str) && TextUtils.isDigitsOnly(d27Str)) {
+                                d27 = Integer.valueOf(d27Str);
+                                d27 = d27 & 0x000000ff;
+                                d27 = d27 << 16;
+                            }
+                            if (!TextUtils.isEmpty(d28Str) && TextUtils.isDigitsOnly(d28Str)) {
+                                d28 = Integer.valueOf(d28Str);
+                                d28 = d28 & 0x000000ff;
+                                d28 = d28 << 24;
+                                d28 = d28 & 0xff000000;
+                            }
+                            latitudeB = d25 | d26 | d27 | d28;
+                            //tvE.setText("E: " + String.format("%.2f", latitudeB * 0.0000001));
+                            String d21Str = dParams.get("D21");
+                            String d22Str = dParams.get("D22");
+                            String d23Str = dParams.get("D23");
+                            String d24Str = dParams.get("D24");
+                            int d21 = 0;
+                            int d22 = 0;
+                            int d23 = 0;
+                            int d24 = 0;
+                            if (!TextUtils.isEmpty(d21Str) && TextUtils.isDigitsOnly(d21Str)) {
+                                d21 = Integer.valueOf(d21Str);
+                                d21 = d21 & 0x000000ff;
+                            }
+                            if (!TextUtils.isEmpty(d22Str) && TextUtils.isDigitsOnly(d22Str)) {
+                                d22 = Integer.valueOf(d22Str);
+                                d22 = d22 & 0x000000ff;
+                                d22 = d22 << 8;
+                            }
+                            if (!TextUtils.isEmpty(d23Str) && TextUtils.isDigitsOnly(d23Str)) {
+                                d23 = Integer.valueOf(d23Str);
+                                d23 = d23 & 0x000000ff;
+                                d23 = d23 << 16;
+                            }
+                            if (!TextUtils.isEmpty(d24Str) && TextUtils.isDigitsOnly(d24Str)) {
+                                d24 = Integer.valueOf(d24Str);
+                                d24 = d24 & 0x000000ff;
+                                d24 = d24 << 24;
+                            }
+                            longitudeB = d21 | d22 | d23 | d24;
+                            //tvN.setText("N: " + String.format("%.2f", longitudeB * 0.0000001));
+//                            int distance = (int)getDistance(latitude,longitude,longitudeB,latitudeB);
+//                            distance = Math.abs(distance);
+//                            if (distance > 300000) {
+//                                distance = 0;
+//                            }
+                            tvDistance.setText(String.format("%.1f",distance * 0.1));
                             int roll = Integer.valueOf(dParams.get("D6")) | (Integer.valueOf(dParams.get("D7")) << 8);
-                            tvRoll.setText("Roll: " + String.format("%.1f", roll * 0.1));
+                            //tvRoll.setText("Roll: " + String.format("%.1f", roll * 0.1));
                             int pitch = Integer.valueOf(dParams.get("D8")) | (Integer.valueOf(dParams.get("D9")) << 8);
-                            tvPatch.setText("Pitch: " + String.format("%.1f", pitch * 0.1));
-                            int yaw = Integer.valueOf(dParams.get("D10")) | (Integer.valueOf(dParams.get("D11")) << 8);
-                            tvYaw.setText("Yaw: " + String.format("%.1f", yaw * 0.1));
-                            int lock = Integer.valueOf(dParams.get("D12")) & 0x0f;
-                            int flyType = (Integer.valueOf(dParams.get("D12")) >> 4) & 0x0f;
-                            int flyStatus = Integer.valueOf(dParams.get("D12")) & 0x0f;
+                            //tvPatch.setText("Pitch: " + String.format("%.1f", pitch * 0.1));
+                            String yaw1Str = dParams.get("D10");
+                            String yaw2Str = dParams.get("D11");
+                            int yaw1 = 0;
+                            int yaw2 = 0;
+                            if (!TextUtils.isEmpty(yaw1Str) && TextUtils.isDigitsOnly(yaw1Str)) {
+                                yaw1 = Integer.valueOf(yaw1Str);
+                                yaw1 = yaw1 & 0x000000ff;
+                            }
+                            if (!TextUtils.isEmpty(yaw2Str) && TextUtils.isDigitsOnly(yaw2Str)) {
+                                yaw2 = Integer.valueOf(yaw2Str);
+                                yaw2 = yaw2 & 0x000000ff;
+                                yaw2 = yaw2 << 8;
+                                yaw2 = yaw2 & 0x0000ff00;
+                            }
+                            int yaw = yaw1 | yaw2;
+                            short sYaw = (short) yaw;
+                            //tvYaw.setText("Yaw: " + String.format("%.1f", yaw * 0.1));
+
+                            String typeAndStatusStr = dParams.get("D12");
+                            int typeAndStatus = 0;
+                            if (!TextUtils.isEmpty(typeAndStatusStr) && TextUtils.isDigitsOnly(typeAndStatusStr)) {
+                                typeAndStatus = Integer.valueOf(typeAndStatusStr);
+                                typeAndStatus = typeAndStatus & 0x000000ff;
+                            }
+                            int lock = typeAndStatus & 0x0000000f;
+                            flyType = (typeAndStatus >> 4) & 0x0000000f;
+                            flyStatus = typeAndStatus & 0x0000000f;
                             String[] arrType = new String[]{"", "悬停模式", "起飞模式", "降落模式", "返航模式", "航点模式", "跟随模式", "环绕模式", "自稳模式"};
                             String[] arrStatus = new String[]{"已上锁", "已解锁未起飞", "已解锁已起飞", "失控返航", "一级返航", "二级返航", "一键返航", "低压降落", "一键降落", "一键起飞", "陀螺仪校准", "磁力计校准"};
-                            txtStatus.setText("状态：" + arrType[flyType] + " " + arrStatus[flyStatus]);
+                            //txtStatus.setText("状态：" + arrType[flyType] + " " + arrStatus[flyStatus]);
                             if (lock == 0) {
                                 ivLock.setImageResource(R.mipmap.lock);
                             } else {
                                 ivLock.setImageResource(R.mipmap.lock1);
                             }
+
+                            if (flyStatus == 0x02) {
+                                btnLandingOrTakeoff.setBackgroundResource(R.mipmap.main_landing);
+                            } else if (flyStatus == 0x00) {
+                                btnLandingOrTakeoff.setBackgroundResource(R.mipmap.main_takeoff_landing);
+                            }
+
+                            //tvTemp.setText("" + lock + " " + longitudeB * 0.0000001 + " " + latitudeB * 0.0000001 + " " + sYaw + " " + latitude * 0.0000001 + " " + longitude * 0.0000001);
+
+                            if (flyBackCount > 0) {
+                                if (flyType == 0x04) { // 返航模式
+                                    flyBackCount = 0;
+                                } else {
+                                    if (flyBackCount > 3) {
+                                        flyBackCount = 0;
+                                        return;
+                                    }
+                                    flyback();
+                                }
+                            }
+                            if (cancelFlyBackCount > 0) {
+                                if (flyType == 0x04) { // 返航模式
+                                    if (cancelFlyBackCount > 3) {
+                                        cancelFlyBackCount = 0;
+                                        return;
+                                    }
+                                    flyback();
+                                } else {
+                                    cancelFlyBackCount = 0;
+                                }
+                            }
+
+                            if (flyType == 0x04) {
+                                btnFlyBack.setBackgroundResource(R.mipmap.main_voyage_home01);
+                            } else {
+                                btnFlyBack.setBackgroundResource(R.mipmap.main_voyage_home);
+                            }
+
+                            if (flyFollowCount > 0) { // 跟随数量判断
+                                if (flyType == 0x06) { // 跟随模式
+                                    flyFollowCount = 0; // 清空跟随数量计数
+                                } else { // 非跟随模式
+                                    if (flyFollowCount > 3) { // 如果跟随数量计数大于3
+                                        flyFollowCount = 0; // 清空跟随数量计数
+                                        return;
+                                    } // 如果小于3，则再发一次跟随
+                                    follow(); // 执行跟随方法
+                                }
+                            }
+                            if (cancelFlyFollowCount > 0) {
+                                if (flyType == 0x06) { // 跟随模式
+                                    if (cancelFlyFollowCount > 3) {
+                                        cancelFlyFollowCount = 0;
+                                        return;
+                                    }
+                                    follow();// 取消跟随
+                                } else {
+                                    cancelFlyFollowCount = 0;
+                                }
+                            }
+
+                            if (flyType == 0x06) {
+                                btnMore.setBackgroundResource(R.mipmap.main_hide_views01);
+                            } else {
+                                btnMore.setBackgroundResource(R.mipmap.main_hide_views);
+                            }
+
+                            if (latitude != 0 && longitude != 0) {
+                                double angle = getAngle1(latitude * 0.0000001, longitude * 0.0000001, longitudeB * 0.0000001, latitudeB * 0.0000001);
+                                int i = (int)(angle / (180.0 / 8));
+                                i = -i;
+                                float angle1 = (float) (i * (180.0 / 8) - 90);
+                                if (angle1 <= -360) {
+                                    angle1 = angle1 + 360;
+                                }
+                                if (angle1 >= 360) {
+                                    angle1 = angle1 - 360;
+                                }
+                                rl_comprass.setRotation(angle1);
+                                float angle2 = (float) (-(sYaw / 1800.0) * 180.0 - angle1);
+                                if (angle2 <= 360) {
+                                    angle2 = angle2 + 360;
+                                }
+                                if (angle2 >= 360) {
+                                    angle2 = angle2 - 360;
+                                }
+                                iv_arrow.setRotation(angle2);
+                                tvTemp.setText("" + angle1 + " " + angle2);
+                            }
+
                             String sLowU = dParams.get("D29");
                             if (sLowU != null && sLowU.length() > 0) {
                                 int iU = Integer.parseInt(sLowU);
@@ -2217,6 +2344,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                                     imgBattery.setBackgroundResource(R.mipmap.main_battery_3);
                                 }
                             }
+                            if (gpsStarting) {
+                                return;
+                            }
+                            gpsStarting = true;
+                            startGPS(); // 启动定位功能
                             return;
                         } else if (Integer.valueOf(cmd) == 0xa0) {
                             int value = Integer.valueOf(dParams.get("D6"));
@@ -2387,23 +2519,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     }
                     break;
                 }
-
-//                case Topic.BATTERY_STATUS://电池电量
-//                    String level = data.getParams().get(TopicKey.LEVEL);
-//                    if (!TextUtils.isEmpty(level) && TextUtils.isDigitsOnly(level)){
-//                        int iValue=Integer.valueOf(level);
-//                        if(iValue==0){
-//                            imgBattery.setBackgroundResource(R.mipmap.main_battery_0);
-//                        }else if(iValue==1){
-//                            imgBattery.setBackgroundResource(R.mipmap.main_battery_1);
-//                        }else if(iValue==2){
-//                            imgBattery.setBackgroundResource(R.mipmap.main_battery_2);
-//                        }else if(iValue>2){
-//                            imgBattery.setBackgroundResource(R.mipmap.main_battery_3);
-//                        }
-//                    }
-//                    break;
-                //imgBattery
             }
         }
     };
@@ -2673,30 +2788,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 int x = 0;
                 int y = 0;
 
-                if (rawX < 0) {
-                    x = (int) ((rawX * FlyData.MIDDLE / radius) - 0.5);
-                } else {
-                    x = (int) ((rawX * FlyData.MIDDLE / radius) + 0.5);
+                x = (int)(ViewHelper.getTranslationX(btnGSensorPoint));
+                y = (int)(ViewHelper.getTranslationY(btnGSensorPoint));
+
+                int valueX = (int)(x * 1000 / radius);
+                int valueY = (int)(y * 1000 / radius);
+
+                if ((valueX < kDeadValue && valueX > -kDeadValue ) &&(valueY < kDeadValue && valueY > -kDeadValue) ) {
+                    valueX = 0;
+                    valueY = 0;
                 }
 
-                if (rawY < 0) {
-                    y = (int) ((rawY * FlyData.MIDDLE / radius) - 0.5);
-                } else {
-                    y = (int) ((rawY * FlyData.MIDDLE / radius) + 0.5);
-                }
+                FlyData.rudderData[1] = valueX;
+                FlyData.rudderData[2] = valueY;
 
-                x = x + FlyData.MIDDLE;
-                y = -y + FlyData.MIDDLE;
-
-                if (x > 255)
-                    x = 255;
-                if (y > 255)
-                    y = 255;
-
-                FlyData.rudderData[1] = x;
-                FlyData.rudderData[2] = y;
-
-                Log.d(tag, "gsensor x=" + x + " y=" + y);
+                Log.d(tag, "gsensor x=" + valueX + " y=" + valueY);
 
                 break;
         }
@@ -3008,7 +3114,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
         //viewBackground.setVisibility(View.VISIBLE);
         mApplication.UAV_height = 0;
-        txtHeight.setText(getString(R.string.main_height) + mApplication.UAV_height + "m");
     }
 
     private long mStartTime = 0;
@@ -3114,7 +3219,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         int iRemainMills = (int) lDiffMills - iHour * 60 * 60;
         int iMin = iRemainMills / 60;
         int iSecond = iRemainMills - iMin * 60;
-        String sTime = fit2(iHour) + ":" + fit2(iMin) + ":" + fit2(iSecond);
+        String sTime = fit2(iMin) + ":" + fit2(iSecond);
         return sTime;
     }
 
@@ -3151,10 +3256,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     private void switchPanelVisible() {
         int setVisible;
         if (leftPanel.getVisibility() != View.VISIBLE) {
+            temSwitchHiden = false;
             setVisible = View.VISIBLE;
             leftPanel.setAnimation(AnimationUtils.loadAnimation(this, R.anim.left_enter));
             rightPanel.setAnimation(AnimationUtils.loadAnimation(this, R.anim.right_enter));
             btnHidePanel.setBackgroundResource(R.mipmap.main_joystick_switch_sel);
+            stopFlyFollowTimer();
             startFlyCtrlTimer();//ljw
         } else {
             setVisible = View.INVISIBLE;
@@ -3165,13 +3272,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
             if (isGSensor) {
                 sensor();
             }
-            if (isFollow) {
-                follow();
-            }
             RequestCmd aNewCmd = new RequestCmd();
             aNewCmd.setTopic("GENERIC_CMD");
             aNewCmd.setOperation("PUT");
-            aNewCmd.setParams(takeoffOrLandingModel.getFlyCtrlDataMap((byte) 0x04)); // 停止
+            aNewCmd.setParams(FlyHoverModel.getFlyCtrlDataMap()); // 悬停
             ClientManager.getClient().tryToGet(aNewCmd, new SendResponse() {
                 @Override
                 public void onResponse(Integer integer) {
@@ -3182,16 +3286,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     }
                 }
             });
-            temSwitch = true;
+            temSwitchHiden = true;
             mSwitch.setChecked(false);
-            isLandingOrTakeOff = false;
-            btnLandingOrTakeoff.setBackgroundResource(R.mipmap.main_takeoff_landing);
-            bHomeWard = false;
-            btnFlyBack.setBackgroundResource(R.mipmap.main_voyage_home); //全部重置为初始状态
         }
         leftPanel.setVisibility(setVisible);
         rightPanel.setVisibility(setVisible);
-        mSwitch.setVisibility(setVisible);
     }
 
     //隐藏工具栏动画
@@ -3640,23 +3739,108 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
-    private void startLocation() {
-        if (!isopen()){
-            Toast.makeText(MainActivity.this, "GPS没开", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        locationService.start();
-    }
-
-    private BDLocationListener mListener = new BDLocationListener() {
+    private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            latitude = (int)(location.getLatitude() * 10000000);
-            longitude = (int)(location.getLongitude() * 10000000);
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                if (location.getLatitude() == 0.0 || location.getLongitude() == 0.0) {
+                    return;
+                }
+                latitude = (int)((location.getLatitude() + 0.002598) * 10000000);
+                longitude = (int)((location.getLongitude() - 0.005) * 10000000);
+                //LatLng ll = convertBaiduToGPS(new LatLng(latitude * 0.0000001, longitude * 0.0000001));
+                //latitude = (int)(ll.latitude * 10000000);
+                //longitude = (int)(ll.longitude * 10000000);
+                Log.d("location", "lat: " + latitude + " long: " + longitude);
+            } else {
+                Log.d("location","定位失败");
+            }
+
         }
 
     };
+
+    private float calulateAngleLinePointA(float pointAX, float pointAY, float pointOX, float pointOY){
+        int deltaX = (int)(pointAX-pointOX);
+        int deltaY = (int)(pointAY-pointOY);
+        double distance = Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+        double radian = Math.acos(deltaX / distance);
+        return (float)(radian) * (pointAY < pointOY ?  -1 : 1);
+    }
+
+    public double getDistance(LatLng start, LatLng end) {
+
+        double lon1 = (Math.PI / 180) * start.longitude;
+        double lon2 = (Math.PI / 180) * end.longitude;
+        double lat1 = (Math.PI / 180) * start.latitude;
+        double lat2 = (Math.PI / 180) * end.latitude;
+
+        // 地球半径
+        double R = 6371;
+
+        // 两点间距离 km，如果想要米的话，结果*1000就可以了
+        double d = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
+                * R;
+
+        return d;
+    }
+
+    public double getDistance(int lat, int lng, int latB, int lngB) {
+        LatLng stare = new LatLng(lat * 0.0000001, lng * 0.0000001);
+        LatLng end = new LatLng(latB * 0.0000001, lngB * 0.0000001);
+        double double_distance = getDistance(stare, end);
+        return double_distance * 1000;
+    }
+
+    private static double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    /**
+     * 将百度坐标转变成火星坐标
+     *
+     * @param lngLat_bd 百度坐标（百度地图坐标）
+     * @return 火星坐标(高德、腾讯地图等)
+     */
+    public static LatLng baidu_to_gaode(LatLng lngLat_bd) {
+        double x = lngLat_bd.longitude - 0.0065, y = lngLat_bd.latitude - 0.006;
+        double z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * x_pi);
+        double theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);
+        return new LatLng(dataDigit(6, z * Math.sin(theta)), dataDigit(6, z * Math.cos(theta)));
+    }
+
+    static double dataDigit(int digit, double in) {
+        return new BigDecimal(in).setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+    }
+
+    public static LatLng convertBaiduToGPS(LatLng sourceLatLng) {
+        // 将GPS设备采集的原始GPS坐标转换成百度坐标
+        CoordinateConverter converter = new CoordinateConverter();
+        converter.from(CoordinateConverter.CoordType.GPS);
+        // sourceLatLng待转换坐标
+        converter.coord(sourceLatLng);
+        LatLng desLatLng = converter.convert();
+        double latitude = 2 * sourceLatLng.latitude - desLatLng.latitude;
+        double longitude = 2 * sourceLatLng.longitude - desLatLng.longitude;
+        BigDecimal bdLatitude = new BigDecimal(latitude);
+        bdLatitude = bdLatitude.setScale(6, BigDecimal.ROUND_HALF_UP);
+        BigDecimal bdLongitude = new BigDecimal(longitude);
+        bdLongitude = bdLongitude.setScale(6, BigDecimal.ROUND_HALF_UP);
+        return new LatLng(bdLatitude.doubleValue(), bdLongitude.doubleValue());
+    }
+
+    public static double getAngle1(double lat_a, double lng_a, double lat_b, double lng_b) {
+
+        double y = Math.sin(lng_b-lng_a) * Math.cos(lat_b);
+        double x = Math.cos(lat_a)*Math.sin(lat_b) - Math.sin(lat_a)*Math.cos(lat_b)*Math.cos(lng_b-lng_a);
+        double bearing = Math.atan2(y, x);
+
+        bearing = Math.toDegrees(bearing);
+        if(bearing < 0){
+            bearing = bearing + 360;
+        }
+        return bearing;
+
+    }
 
 }
 

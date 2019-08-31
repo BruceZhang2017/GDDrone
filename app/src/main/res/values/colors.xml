@@ -58,4 +58,6 @@
     <color name="transparent_text_white">#77ffffff</color>
     
     <color name="gray_percent_50">#80808080</color>
+    <color name="gray_percent_100">#FF464646</color>
+    <color name="font_color">#FFC9C9CA</color>
 </resources>

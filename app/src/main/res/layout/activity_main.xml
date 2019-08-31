@@ -56,146 +56,154 @@
 
 
         <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_top_left_bg"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/red"/>
+
             <LinearLayout
                 android:id="@+id/topControlBar"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:background="@color/gray_percent_50">
+                android:layout_height="34dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/weixing"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30dp"/>
                     <TextView
-                        android:id="@+id/txtHeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Height: 0m"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="8dp"
-                        android:textSize="8sp"/>
+                        android:id="@+id/txtPlanet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textColor="@color/font_color"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textSize="25sp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/d0"/>
                     <TextView
                         android:id="@+id/txtDistance"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Distance: 0m"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="8dp"
-                        android:textSize="8sp"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textColor="@color/font_color"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="25sp"/>
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="7dp"
+                        android:src="@mipmap/m0"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@mipmap/h0"/>
                     <TextView
-                        android:id="@+id/txtSpeedV"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Speed V: 0m/s"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="8dp"
-                        android:textSize="8sp"/>
+                        android:id="@+id/txtHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textColor="@color/font_color"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="25sp"/>
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="7dp"
+                        android:src="@mipmap/m0"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/hs0"/>
                     <TextView
                         android:id="@+id/txtSpeedH"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Speed H: 0m/s"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="8dp"
-                        android:textSize="8sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-                    <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:src="@mipmap/weixing"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="4dp"/>
-                        <TextView
-                            android:id="@+id/txtPlanet"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/bg_white"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="2dp"
-                            android:textSize="8sp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/txtN"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="N: 0.0"
-                            android:textColor="@color/bg_white"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="8dp"
-                            android:textSize="8sp"/>
-                        <TextView
-                            android:id="@+id/txtE"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="E: 0.0"
-                            android:textColor="@color/bg_white"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="8dp"
-                            android:textSize="8sp"/>
-                    </LinearLayout>
+                        android:text="0"
+                        android:textColor="@color/font_color"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="25sp"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="3dp"
+                        android:src="@mipmap/km0"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/vs0"/>
                     <TextView
-                        android:id="@+id/txtRoll"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Roll: 0.0"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="2dp"
-                        android:textSize="8sp"/>
-                    <TextView
-                        android:id="@+id/txtPatch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pitch: 0.0"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="4dp"
-                        android:textSize="8sp"/>
-                    <TextView
-                        android:id="@+id/txtYaw"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Yaw: 0.0"
-                        android:textColor="@color/bg_white"
-                        android:gravity="center_horizontal"
-                        android:paddingTop="4dp"
-                        android:textSize="8sp"/>
+                        android:id="@+id/txtSpeedV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="0"
+                        android:textColor="@color/font_color"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textSize="25sp"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="3dp"
+                        android:src="@mipmap/ms0"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,7 +214,7 @@
                     android:layout_marginTop="5dp">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:gravity="center_horizontal">
                         <ImageButton
                             android:id="@+id/btnWifi"
@@ -222,8 +230,7 @@
                             android:layout_height="22dp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:background="@mipmap/lock" />
+                            android:layout_marginLeft="5dp" />
                         <ImageView
                             android:id="@+id/imgBattery"
                             android:layout_width="22dp"
@@ -233,22 +240,6 @@
                             android:layout_marginLeft="5dp"
                             android:background="@mipmap/main_battery_3" />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:layout_marginTop="5dp">
-
-                        <TextView
-                            android:id="@+id/txtStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/text_white"
-                            android:textSize="8sp"/>
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -256,7 +247,9 @@
                 android:id="@+id/leftPanel"
                 android:layout_width="270dp"
                 android:layout_height="250dp"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="30dp">
                 <ImageView
                     android:id="@+id/imgOilPanel"
                     android:layout_width="100dp"
@@ -277,7 +270,9 @@
                 android:layout_width="270dp"
                 android:layout_height="250dp"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp"
+                android:layout_marginRight="30dp">
                 <ImageView
                     android:id="@+id/imgGSensorPanel"
                     android:layout_width="100dp"
@@ -302,51 +297,27 @@
                 tools:ignore="DisableBaselineAlignment">
 
                 <ImageButton
-                    android:id="@+id/btnRecorder"
+                    android:id="@+id/btnMore"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@mipmap/main_recorder"/>
-
-                <ImageView
-                    android:id="@+id/txtRecorderRed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_red_dot"
-                    android:layout_margin="16dp"
-                    android:contentDescription="@null"
-                    android:layout_toRightOf="@id/btnRecorder"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:visibility="gone"/>
-                <TextView
-                    android:id="@+id/txtRecorderTime"
-                    android:layout_width="200dp"
-                    android:layout_height="20dp"
-                    android:layout_toRightOf="@id/txtRecorderRed"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="16dp"
-                    android:text="00:00:00"
-                    android:textColor="@color/text_red"
-                    android:visibility="gone"
-                    />
+                    android:background="@mipmap/main_hide_views" />
 
                 <ImageButton
-                    android:id="@+id/btnTakePhoto"
+                    android:id="@+id/btnGSensor"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:layout_marginTop="92dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="52dp"
-                    android:contentDescription="@null"
-                    android:background="@mipmap/main_snapshot"/>
+                    android:background="@mipmap/main_gsensor" />
 
                 <ImageButton
                     android:id="@+id/btnHidePanel"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="94dp"
+                    android:layout_marginTop="154dp"
                     android:contentDescription="@null"
                     android:background="@mipmap/main_joystick_switch_sel"/>
 
@@ -355,7 +326,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="25dp"
                     android:layout_alignParentBottom="true"
                     android:contentDescription="@null"
                     android:background="@mipmap/main_photos"/>
@@ -366,32 +337,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_below="@id/topControlBar"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="-2dp">
 
                 <ImageButton
-                    android:id="@+id/btnMore"
+                    android:id="@+id/btnRecorder"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
                     android:layout_alignParentEnd="true"
-                    android:background="@mipmap/main_hide_views"/>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@mipmap/main_recorder" />
+
+                <ImageView
+                    android:id="@+id/txtRecorderRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/txtRecorderTime"
+                    android:contentDescription="@null"
+                    android:src="@mipmap/ic_red_dot"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtRecorderTime"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:text="00:00"
+                    android:textColor="@color/text_red"
+                    android:visibility="gone" />
+
                 <ImageButton
-                    android:id="@+id/btnGSensor"
+                    android:id="@+id/btnTakePhoto"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="92dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="52dp"
-                    android:background="@mipmap/main_gsensor"/>
+                    android:background="@mipmap/main_snapshot"
+                    android:contentDescription="@null" />
+
                 <ImageButton
                     android:id="@+id/btnSensorSetting"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="154dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="94dp"
-                    android:background="@mipmap/main_sensor_setting"/>
+                    android:background="@mipmap/main_sensor_setting_sel" />
 
                 <ImageButton
                     android:id="@+id/btnSettings"
@@ -400,9 +399,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:contentDescription="@null"
-                    android:background="@mipmap/main_settings" />
+                    android:layout_marginBottom="25dp"
+                    android:background="@mipmap/main_settings"
+                    android:contentDescription="@null" />
 
 
                 <ImageView
@@ -410,19 +409,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:contentDescription="@null"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/drawable_resolution_hd"/>
+                    android:src="@drawable/drawable_resolution_hd" />
             </RelativeLayout>
-
-
-
 
             <RelativeLayout
                 android:id="@+id/bottomControlBar"
                 android:layout_width="200dp"
-                android:layout_height="48dp"
+                android:layout_height="68dp"
+                android:layout_marginBottom="5dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true">
                 <Switch
@@ -435,13 +432,43 @@
                     android:thumb="@drawable/thumb"
                     android:track="@drawable/track"
                     android:textOn=""
-                    android:textOff=""/>
+                    android:textOff=""
+                    android:visibility="gone"/>
+                <ImageButton
+                    android:id="@+id/btnSpeed"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:enabled="false"
+                    android:background="@mipmap/location_bottom"/>
+                <RelativeLayout
+                    android:id="@+id/rl_comprass"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
+                    <ImageView
+                        android:id="@+id/iv_comprass"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"/>
+                    <ImageView
+                        android:id="@+id/iv_arrow"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/red_arrow"/>
+                </RelativeLayout>
                 <ImageButton
                     android:id="@+id/btnLandingOrTakeoff"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_toRightOf="@id/switchLock"
-                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/btnSpeed"
+                    android:layout_marginRight="35dp"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
                     android:background="@mipmap/main_takeoff_landing"/>
@@ -449,21 +476,11 @@
                     android:id="@+id/btnFlyBack"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_toRightOf="@id/btnLandingOrTakeoff"
-                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/btnSpeed"
+                    android:layout_marginLeft="35dp"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
                     android:background="@mipmap/main_voyage_home"/>
-
-                <ImageButton
-                    android:id="@+id/btnSpeed"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_toRightOf="@id/btnFlyBack"
-                    android:layout_marginLeft="10dp"
-                    android:layout_centerVertical="true"
-                    android:contentDescription="@null"
-                    android:background="@mipmap/main_speed_h"/>
             </RelativeLayout>
 
             <!--android:visibility="gone"-->
@@ -636,5 +653,19 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="50dp"
+            android:textSize="15dp"
+            android:textColor="@color/bg_red" />
+    </RelativeLayout>
 
 </RelativeLayout>

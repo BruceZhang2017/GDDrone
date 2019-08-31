@@ -36,21 +36,21 @@ public class FlyFollowModel {
         mSerialData[14] = checkSum(mSerialData);
 
         ArrayMap aParam = new ArrayMap();
-        aParam.put("D0",mSerialData[0]+"");
-        aParam.put("D1", mSerialData[1]+"");
-        aParam.put("D2", mSerialData[2]+"");
-        aParam.put("D3", mSerialData[3]+"");
-        aParam.put("D4", mSerialData[4]+"");
-        aParam.put("D5", mSerialData[5]+"");
-        aParam.put("D6", mSerialData[6]+"");
-        aParam.put("D7", mSerialData[7]+"");
-        aParam.put("D8", mSerialData[8]+"");
-        aParam.put("D9", mSerialData[9]+"");
-        aParam.put("D10",mSerialData[10]+"");
-        aParam.put("D11",mSerialData[11]+"");
-        aParam.put("D12",mSerialData[12]+"");
-        aParam.put("D13",mSerialData[13]+"");
-        aParam.put("D14",mSerialData[14]+"");
+        aParam.put("D0",btou(mSerialData[0])+"");
+        aParam.put("D1", btou(mSerialData[1])+"");
+        aParam.put("D2", btou(mSerialData[2])+"");
+        aParam.put("D3", btou(mSerialData[3])+"");
+        aParam.put("D4", btou(mSerialData[4])+"");
+        aParam.put("D5", btou(mSerialData[5])+"");
+        aParam.put("D6", btou(mSerialData[6])+"");
+        aParam.put("D7", btou(mSerialData[7])+"");
+        aParam.put("D8", btou(mSerialData[8])+"");
+        aParam.put("D9", btou(mSerialData[9])+"");
+        aParam.put("D10",btou(mSerialData[10])+"");
+        aParam.put("D11",btou(mSerialData[11])+"");
+        aParam.put("D12",btou(mSerialData[12])+"");
+        aParam.put("D13",btou(mSerialData[13])+"");
+        aParam.put("D14",btou(mSerialData[14])+"");
 
         for(int i=0;i<15;i++){
             String string = (String) aParam.get("D"+i);
@@ -58,5 +58,12 @@ public class FlyFollowModel {
         }
 
         return aParam;
+    }
+
+    public static final int btou(byte b) {
+        if (b >= 0)
+            return (b + 0);
+        else
+            return (256 + b);
     }
 }

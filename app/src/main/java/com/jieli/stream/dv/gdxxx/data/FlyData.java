@@ -52,32 +52,58 @@ public class FlyData {
         mSerialData[3] = 0x6a;
         mSerialData[4] = 0x04;
         mSerialData[5] = 0x00;
-        mSerialData[6] = (byte) rudderData[2]; // pitch
-        mSerialData[7] = (byte) rudderData[1]; // roll
-        if (rudderData[3] < 25) {
-            mSerialData[8] = 0;
-        } else {
-            mSerialData[8] = (byte) rudderData[3];
+        int pitch = (int)(256-(rudderData[2] + 1000)*0.128);
+        if (pitch > 255) {
+            pitch = 255;
         }
-        mSerialData[9] = (byte) rudderData[4]; // yaw
+        if (pitch < 0) {
+            pitch = 0;
+        }
+        mSerialData[6] = (byte)pitch; // pitch
+        int roll = (int)((rudderData[1] + 1000)*0.128);
+        if (roll > 255) {
+            roll = 255;
+        }
+        if (roll < 0) {
+            roll = 0;
+        }
+        mSerialData[7] = (byte)roll; // roll
+        int oil = (int)(256-(rudderData[3] + 1000)*0.128);
+        if (oil > 255) {
+            oil = 255;
+        }
+        if (oil < 0) {
+            oil = 0;
+        }
+        mSerialData[8] = (byte)oil; // oil
+        int yaw = (int)((rudderData[4] + 1000)*0.128);
+        if (yaw > 255) {
+            yaw = 255;
+        }
+        if (yaw < 0) {
+            yaw = 0;
+        }
+        mSerialData[9] = (byte)yaw; // yaw
         mSerialData[10] = checkSum(mSerialData);
 
         ArrayMap aParam = new ArrayMap();
-        aParam.put("D0",mSerialData[0]+"");
-        aParam.put("D1", mSerialData[1]+"");
-        aParam.put("D2", mSerialData[2]+"");
-        aParam.put("D3", mSerialData[3]+"");
-        aParam.put("D4", mSerialData[4]+"");
-        aParam.put("D5", mSerialData[5]+"");
-        aParam.put("D6", mSerialData[6]+"");
-        aParam.put("D7", mSerialData[7]+"");
-        aParam.put("D8", mSerialData[8]+"");
-        aParam.put("D9", mSerialData[9]+"");
-        aParam.put("D10",mSerialData[10]+"");
+        aParam.put("D0",btou(mSerialData[0])+"");
+        aParam.put("D1", btou(mSerialData[1])+"");
+        aParam.put("D2", btou(mSerialData[2])+"");
+        aParam.put("D3", btou(mSerialData[3])+"");
+        aParam.put("D4", btou(mSerialData[4])+"");
+        aParam.put("D5", btou(mSerialData[5])+"");
+        aParam.put("D6", btou(mSerialData[6])+"");
+        aParam.put("D7", btou(mSerialData[7])+"");
+        aParam.put("D8", btou(mSerialData[8])+"");
+        aParam.put("D9", btou(mSerialData[9])+"");
+        aParam.put("D10",btou(mSerialData[10])+"");
 
+        String str = "";
         for(int i=0;i<11;i++){
-            Log.d("data","D"+i+":"+byteToHexStr(mSerialData[i]));
+            str += " D"+i+":"+byteToHexStr(mSerialData[i]);
         }
+        Log.d("data",str);
 
         return aParam;
     }
@@ -98,6 +124,13 @@ public class FlyData {
         }
 
         return sb.toString();
+    }
+
+    public static final int btou(byte b) {
+        if (b >= 0)
+            return (b + 0);
+        else
+            return (256 + b);
     }
 
 }

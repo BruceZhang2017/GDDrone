@@ -21,8 +21,10 @@ import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.jieli.lib.dv.control.DeviceClient;
+import com.jieli.stream.dv.gdxxx.baidu.utils.LocationService;
 import com.jieli.stream.dv.gdxxx.bean.DeviceDesc;
 import com.jieli.stream.dv.gdxxx.bean.DeviceSettingInfo;
 import com.jieli.stream.dv.gdxxx.ui.activity.FlashActivity;
@@ -152,6 +154,8 @@ public class a extends Application {
     public static String mPicturePath_Rear=":/WiFiCam/Pictures/";
     public static String ThumbPath =":/WiFiCam/Thumb/";
 
+    public LocationService locationService;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -207,6 +211,12 @@ public class a extends Application {
 
 
         //MobSDK.init(this);
+
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.setCoordType(CoordType.GCJ02);
+        //设置使用https请求
+        SDKInitializer.setHttpsEnable(true);
     }
 
     public static synchronized a getApplication() {
