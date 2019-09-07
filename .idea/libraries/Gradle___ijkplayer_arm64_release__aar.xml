@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: :ijkplayer-arm64-release:@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/ijkplayer-arm64-release.aar/544d3419cdcfe41016ae31394dd5ab01/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/ijkplayer-arm64-release.aar/544d3419cdcfe41016ae31394dd5ab01/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

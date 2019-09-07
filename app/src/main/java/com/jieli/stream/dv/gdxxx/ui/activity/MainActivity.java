@@ -291,10 +291,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                             }
                         } else {
                             a.getApplication().showToastShort(R.string.open_rts_tip);
-                            if (mTryConnectCount < 5) {
-                                mTryConnectCount++;
+                            //if (mTryConnectCount < 5) {
+                                //mTryConnectCount++;
                                 tryConnectWifiDevice();
-                            }
+                            //}
                         }
                         break;
                     case MSG_TAKE_PHOTO:
@@ -341,10 +341,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                             if (!isAdjustResolution) {
                                 a.getApplication().showToastShort(R.string.open_rts_tip);
                             }
-                            if (mTryConnectCount < 5) {
-                                mTryConnectCount++;
+                            //if (mTryConnectCount < 5) {
+                               // mTryConnectCount++;
                                 tryConnectWifiDevice();
-                            }
+                            //}
                         }
                         break;
                     case MSG_FPS_COUNT:
@@ -368,10 +368,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                         Dbug.i(tag, "reconnecting reConnectNum=" + reConnectNum);
                         if (mWifiHelper.isWifiOpen()) {
 
-                            if (mTryConnectCount < 5) {
-                                mTryConnectCount++;
+                            //if (mTryConnectCount < 5) {
+                               // mTryConnectCount++;
                                 tryConnectWifiDevice();
-                            }
+                            //}
                         } else {
                             showOpenWifiDialog();
                         }
@@ -1766,10 +1766,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                             if (code != SEND_SUCCESS) {
                                 isDeviceConnected = false;
                                 Dbug.e(tag, "Send failed!!!");
-                                if (mTryConnectCount < 5) {
-                                    mTryConnectCount++;
+                                //if (mTryConnectCount < 5) {
+                                    //mTryConnectCount++;
                                     tryConnectWifiDevice();
-                                }
+                                //}
                             } else {
                                 isDeviceConnected = true;
                                 setCameraStatus();

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: __local_aars__:/Users/anker/GDDrone/app/libs/zxingjar-1.1.jar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/zxingjar-1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

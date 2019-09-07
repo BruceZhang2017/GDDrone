@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: :netcheck:@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/netcheck.aar/e8c6fc254233c1cc60156e13b97b9cc3/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/netcheck.aar/e8c6fc254233c1cc60156e13b97b9cc3/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

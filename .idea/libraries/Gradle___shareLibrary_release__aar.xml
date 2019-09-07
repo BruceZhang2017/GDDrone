@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: :shareLibrary-release:@aar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/shareLibrary-release.aar/b40d9975794b0b823b155b91ce387bee/jars/libs/open_sdk_r5756_lite.jar!/" />
+      <root url="file://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/shareLibrary-release.aar/b40d9975794b0b823b155b91ce387bee/res" />
+      <root url="jar://$PROJECT_DIR$/../.gradle/caches/transforms-1/files-1.1/shareLibrary-release.aar/b40d9975794b0b823b155b91ce387bee/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
